@@ -1,12 +1,13 @@
+let img;
+function preload(){
+  img = laodImage('assets/images/meeple.png');
+}
+
 function setup() {
-  var cnv = createCanvas(windowWidth, windowHeight);
-  background(255, 0, 200);
+  createCanvas(800, 600);
+  background(192,192,192);
+  image(img,0,0);
 }
 
 function draw() {
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-  background(255, 0, 200);
 }
