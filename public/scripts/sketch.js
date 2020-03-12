@@ -1,6 +1,6 @@
 let img;
 function preload(){
-  img = laodImage('assets/images/meeple.png');
+  img = loadImage('assets/images/meeple.png');
 }
 
 function setup() {
