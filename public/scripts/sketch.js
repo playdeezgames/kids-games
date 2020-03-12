@@ -1,12 +1,8 @@
 function setup() {
-  noCanvas();
-  let btn = createButton('Push Me!');
-  btn.mousePressed(buttonPress);
+  var cnv = createCanvas(windowWidth, windowHeight);
+  cnv.style('display', 'block');
+  background(255, 0, 200);
 }
 
 function draw() {
-}
-
-function buttonPress(){
-  window.open("https://www.google.com");
 }
