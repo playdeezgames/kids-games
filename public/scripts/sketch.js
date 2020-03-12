@@ -33,7 +33,7 @@ function setup() {
 }
 
 function draw() {
-  clear();
+  background("#AAAAAA");
   for(let y in tiles){
     let line = tiles[y];
     for(let x = 0; x< line.length; ++x){
