@@ -8,5 +8,5 @@ function draw() {
 }
 
 function buttonPress(){
-  window.open("www.google.com");
+  window.open("https://www.google.com");
 }
