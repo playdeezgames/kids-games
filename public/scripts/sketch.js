@@ -1,5 +1,5 @@
 let imgs = {};
-let tiles = [
+let tiles = convertToLevel([
   "####################",
   "#@.................#",
   "#..................#",
@@ -20,7 +20,7 @@ let tiles = [
   "#..................#",
   "#..................#",
   "####################"
-];
+]);
 
 function preload(){
   imgs.meeple = loadImage('assets/images/meeple.png');
@@ -47,4 +47,13 @@ function draw() {
       }
     }
   }
+}
+function convertToLevel(lines){
+  let level = [];
+  for(let row in lines){
+    let line = lines[row];
+    let levelRow = [];
+    level.push(levelRow);
+  }
+  return level;
 }
