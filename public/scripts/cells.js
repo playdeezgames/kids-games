@@ -1,19 +1,13 @@
 const CELL_WALL = "#";
 const CELL_AVATAR = "@";
 const CELL_FLOOR = ".";
-const CELL_NORTH_EXIT = "^";
-const CELL_SOUTH_EXIT = "v";
-const CELL_EAST_EXIT = ">";
-const CELL_WEST_EXIT = "<";
 const CELL_SIGN = "!";
+const CELL_WOOD_DOOR = "+";
 let cellSprites = {};
 cellSprites[CELL_WALL]=SPRITE_WALL;
 cellSprites[CELL_AVATAR]=SPRITE_AVATAR;
-cellSprites[CELL_NORTH_EXIT]=SPRITE_UP_ARROW;
-cellSprites[CELL_SOUTH_EXIT]=SPRITE_DOWN_ARROW;
-cellSprites[CELL_EAST_EXIT]=SPRITE_RIGHT_ARROW;
-cellSprites[CELL_WEST_EXIT]=SPRITE_LEFT_ARROW;
 cellSprites[CELL_SIGN]=SPRITE_SIGN;
+cellSprites[CELL_WOOD_DOOR]=SPRITE_WOOD_DOOR;
 class Cells{
     static getSprite(cell){
         return cellSprites[cell];
@@ -23,5 +17,8 @@ class Cells{
     }
     static isSign(cell){
         return cell == CELL_SIGN;
+    }
+    static isExit(cell){
+        return cell == CELL_WOOD_DOOR;
     }
 }

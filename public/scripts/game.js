@@ -37,6 +37,13 @@ class Game{
             if(Cells.isBlocking(cell)){
                 nextColumn = Avatar.column;
                 nextRow = Avatar.row;
+            }else if (Cells.isExit(cell)){
+                let exit = Rooms.getExit(Avatar.room,nextColumn,nextRow);
+                if(exit!=null){
+                    Avatar.room = exit.toRoom;
+                    nextColumn=exit.toColumn;
+                    nextRow = exit.toRow;
+                }
             }
             Avatar.column=nextColumn;
             Avatar.row=nextRow;
@@ -65,7 +72,9 @@ class Game{
             textAlign(CENTER,CENTER);
             textSize(SIGNTEXT_SIZE);
             fill(SIGNTEXT_COLOR);
-            text(sign.text,ZOOM_OFFSET_X+SIGNTEXT_OFFSET_X,ZOOM_OFFSET_Y+SIGNTEXT_OFFSET_Y,SIGNTEXT_WIDTH,SIGNTEXT_HEIGHT);
+            if(sign!=null){
+                text(sign.text,ZOOM_OFFSET_X+SIGNTEXT_OFFSET_X,ZOOM_OFFSET_Y+SIGNTEXT_OFFSET_Y,SIGNTEXT_WIDTH,SIGNTEXT_HEIGHT);
+            }
         }else{
             Sprites.render(SPRITE_CONTROLS_BIG,ZOOM_OFFSET_X,ZOOM_OFFSET_Y);
         }
