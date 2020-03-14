@@ -1,155 +1,43 @@
 
-let roomDatas = {
-    start:[
-        "#########+##########",
-        "#..................#",
-        "#..................#",
-        "#..............!...#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................+",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "+..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#############+######"
-      ],
-    northHall:[
-        "####################",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#########+##########"
-      ],
-    southHall:[
-        "#############+######",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "####################"
-      ],
-    eastHall:[
-        "####################",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "+..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "####################"
-    ],
-    westHall:[
-        "####################",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................+",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "#..................#",
-        "####################"
-    ]
-};
 
 let rooms = {};
 class Rooms{
     static reset(){
         rooms = {
             start: {
-                data: Rooms.convertToLevelData(roomDatas.start),
+                data: Rooms.convertToLevelData(RoomData.start),
                 signs: [
-                    {row:3,column:15,text:'This is a sign.'}
+                    {row:5,column:12,text:'This is a sign.'}
                 ],
                 exits: [
-                    {fromRow:7,fromColumn:19,toRoom:'eastHall',toRow:7,toColumn:1},
-                    {fromRow:0,fromColumn:9,toRoom:'northHall',toRow:18,toColumn:9},
-                    {fromRow:19,fromColumn:13,toRoom:'southHall',toRow:1,toColumn:13},
-                    {fromRow:13,fromColumn:0,toRoom:'westHall',toRow:13,toColumn:18}
-                ]
-            },
-            eastHall: {
-                data: Rooms.convertToLevelData(roomDatas.eastHall),
-                exits: [
-                    {fromRow:7,fromColumn:0,toRoom:'start',toRow:7,toColumn:18}
+                    {fromColumn:13,fromRow:0,toRoom:'northHall',toColumn:13,toRow:18},
+                    {fromColumn:19,fromRow:7,toRoom:'eastHall',toColumn:1,toRow:7},
+                    {fromColumn:8,fromRow:19,toRoom:'southHall',toColumn:8,toRow:1},
+                    {fromColumn:0,fromRow:14,toRoom:'westHall',toColumn:18,toRow:14}
                 ]
             },
             northHall: {
-                data: Rooms.convertToLevelData(roomDatas.northHall),
+                data: Rooms.convertToLevelData(RoomData.northHall),
                 exits: [
-                    {fromRow:19,fromColumn:9,toRoom:'start',toRow:1,toColumn:9}
+                    {fromColumn:13,fromRow:19,toRoom:'start',toColumn:13,toRow:1}
                 ]
             },
-            westHall: {
-                data: Rooms.convertToLevelData(roomDatas.westHall),
+            eastHall: {
+                data: Rooms.convertToLevelData(RoomData.eastHall),
                 exits: [
-                    {fromRow:13,fromColumn:19,toRoom:'start',toRow:13,toColumn:1}
+                    {fromColumn:0,fromRow:7,toRoom:'start',toColumn:18,toRow:7}
                 ]
             },
             southHall: {
-                data: Rooms.convertToLevelData(roomDatas.southHall),
+                data: Rooms.convertToLevelData(RoomData.southHall),
                 exits: [
-                    {fromRow:0,fromColumn:13,toRoom:'start',toRow:18,toColumn:13}
+                    {fromColumn:8,fromRow:0,toRoom:'start',toColumn:8,toRow:18}
+                ]
+            },
+            westHall: {
+                data: Rooms.convertToLevelData(RoomData.westHall),
+                exits: [
+                    {fromColumn:19,fromRow:14,toRoom:'start',toColumn:1,toRow:14}
                 ]
             }
         };
@@ -159,8 +47,9 @@ class Rooms{
         for(let row in lines){
             let line = lines[row];
             let levelRow = [];
-            for(let column=0;column<line.length;++column){
-            levelRow.push(line.charAt(column));
+            let tokens = line.split(',');
+            for(let column=0;column<tokens.length;++column){
+                levelRow.push(Number(tokens[column]));
             }
             level.push(levelRow);
         }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objecttypes>
+ <objecttype name="Cell" color="#a0a0a4">
+  <property name="DestinationColumn" type="int" default="0"/>
+  <property name="DestinationRoom" type="string"/>
+  <property name="DestinationRow" type="int" default="0"/>
+  <property name="IsBlocking" type="bool" default="false"/>
+  <property name="IsExit" type="bool" default="false"/>
+  <property name="IsItem" type="bool" default="false"/>
+  <property name="IsLocked" type="bool" default="false"/>
+  <property name="IsSign" type="bool" default="false"/>
+  <property name="ItemSubtype" type="string"/>
+  <property name="ItemType" type="string"/>
+  <property name="LockType" type="string"/>
+  <property name="SignText" type="string"/>
+ </objecttype>
+</objecttypes>
