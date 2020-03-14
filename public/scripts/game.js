@@ -1,8 +1,10 @@
-const FRAME_RATE = 10;
+const FRAME_RATE = 30;
 const SCREEN_WIDTH = 960;
 const SCREEN_HEIGHT = 640;
 const BACKGROUND_COLOR = "#555555";
 const SIGNTEXT_COLOR = "#000000";
+const UPDATE_TIMER = 200;
+let updateTimer = 0;
 class Game{
     static preload(){
         RoomData.load();
@@ -18,57 +20,61 @@ class Game{
         Game.reset();
     }
     static update(){
-        let nextColumn = Avatar.column;
-        let nextRow = Avatar.row;
-        if(Input.isKeyPressed(LEFT_ARROW) || Input.isKeyPressed(65)){
-            nextColumn--;
-        }
-        if(Input.isKeyPressed(RIGHT_ARROW) || Input.isKeyPressed(68)){
-            nextColumn++;
-        }
-        if(Input.isKeyPressed(UP_ARROW) || Input.isKeyPressed(87)){
-            nextRow--;
-        }
-        if(Input.isKeyPressed(DOWN_ARROW) || Input.isKeyPressed(83)){
-            nextRow++;
-        }
-        if(nextColumn!=Avatar.column || nextRow != Avatar.row){
-            //is next column/row in bounds
-            if(nextColumn>=0 && nextRow>=0 && nextColumn<ROOM_COLUMNS && nextRow<ROOM_ROWS){
-                Avatar.bumpColumn = null;
-                Avatar.bumpRow = null;
-                let cell = Rooms.getCell(Avatar.room, nextColumn, nextRow);
-                if(Cells.isBlocking(cell)){
-                    if(Cells.isLocked(cell)){
-                        let key = Cells.getKey(cell);
-                        if(Avatar.hasInventory(key)){
-                            Avatar.removeInventory(key);
-                            //TODO: make sound
-                            Rooms.setCell(Avatar.room, nextColumn, nextRow,Cells.unlock(cell));
+        updateTimer += deltaTime;
+        if(updateTimer>=UPDATE_TIMER){
+            updateTimer-=UPDATE_TIMER;
+            let nextColumn = Avatar.column;
+            let nextRow = Avatar.row;
+            if(Input.wasKeyPressed(LEFT_ARROW) || Input.wasKeyPressed(65)){
+                nextColumn--;
+            }
+            if(Input.wasKeyPressed(RIGHT_ARROW) || Input.wasKeyPressed(68)){
+                nextColumn++;
+            }
+            if(Input.wasKeyPressed(UP_ARROW) || Input.wasKeyPressed(87)){
+                nextRow--;
+            }
+            if(Input.wasKeyPressed(DOWN_ARROW) || Input.wasKeyPressed(83)){
+                nextRow++;
+            }
+            if(nextColumn!=Avatar.column || nextRow != Avatar.row){
+                if(nextColumn>=0 && nextRow>=0 && nextColumn<ROOM_COLUMNS && nextRow<ROOM_ROWS){
+                    Avatar.bumpColumn = null;
+                    Avatar.bumpRow = null;
+                    let cell = Rooms.getCell(Avatar.room, nextColumn, nextRow);
+                    if(Cells.isBlocking(cell)){
+                        if(Cells.isLocked(cell)){
+                            let key = Cells.getKey(cell);
+                            if(Avatar.hasInventory(key)){
+                                Avatar.removeInventory(key);
+                                //TODO: make sound
+                                Rooms.setCell(Avatar.room, nextColumn, nextRow,Cells.unlock(cell));
+                            }
                         }
-                    }
-                    Avatar.bumpColumn = nextColumn;
-                    Avatar.bumpRow = nextRow;
-                    nextColumn = Avatar.column;
-                    nextRow = Avatar.row;
-                }else if (Cells.isExit(cell)){
-                    let exit = Rooms.getExit(Avatar.room,nextColumn,nextRow);
-                    if(exit!=null){
-                        Avatar.room = exit.toRoom;
-                        Avatar.bumpColumn = null;
-                        Avatar.bumpRow = null;
-                        nextColumn=exit.toColumn;
-                        nextRow = exit.toRow;
+                        Avatar.bumpColumn = nextColumn;
+                        Avatar.bumpRow = nextRow;
+                        nextColumn = Avatar.column;
+                        nextRow = Avatar.row;
+                    }else if (Cells.isExit(cell)){
+                        let exit = Rooms.getExit(Avatar.room,nextColumn,nextRow);
+                        if(exit!=null){
+                            Avatar.room = exit.toRoom;
+                            Avatar.bumpColumn = null;
+                            Avatar.bumpRow = null;
+                            nextColumn=exit.toColumn;
+                            nextRow = exit.toRow;
+                            //TODO: play a sound!
+                        }
+                    }else if(Cells.isItem(cell)){
+                        Avatar.addInventory(cell);
+                        Rooms.setCell(Avatar.room,nextColumn,nextRow,CELL_FLOOR);
                         //TODO: play a sound!
                     }
-                }else if(Cells.isItem(cell)){
-                    Avatar.addInventory(cell);
-                    Rooms.setCell(Avatar.room,nextColumn,nextRow,CELL_FLOOR);
-                    //TODO: play a sound!
+                    Avatar.column=nextColumn;
+                    Avatar.row=nextRow;
                 }
-                Avatar.column=nextColumn;
-                Avatar.row=nextRow;
             }
+            Input.reset();
         }
     }
     static draw(){

@@ -8,10 +8,11 @@ function setup() {
 
 function draw() {
   Game.update();
-  Input.clear();
   Game.draw();
 }
 function keyPressed(){
-  print(keyCode);
   Input.handleKeyPress(keyCode);
+}
+function keyReleased(){
+  Input.handleKeyRelease(keyCode);
 }

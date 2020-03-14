@@ -1,12 +1,17 @@
-let keyStates={};
+let keyStates = {};
+let keyPresses = {};
 class Input{
+    static reset(){
+        keyPresses={};
+    }
     static handleKeyPress(keyCode){
         keyStates[keyCode]=true;
+        keyPresses[keyCode]=true;
     }
-    static isKeyPressed(keyCode){
-        return keyStates[keyCode] || false;
+    static handleKeyRelease(keyCode){
+        keyStates[keyCode]=false;
     }
-    static clear(){
-        keyStates={};
+    static wasKeyPressed(keyCode){
+        return keyPresses[keyCode] || keyStates[keyCode] || false;
     }
 }

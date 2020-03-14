@@ -7,7 +7,8 @@ class Rooms{
             start: {
                 data: Rooms.convertToLevelData(RoomData.start),
                 signs: [
-                    {row:5,column:12,text:'This is a sign.'}
+                    {column:3,row:17,text:'This is a sign! Signs give you hints what to do next!'},
+                    {column:9,row:9,text:'Most of these doors look locked, but what about that one to the right?'}
                 ],
                 exits: [
                     {fromColumn:13,fromRow:0,toRoom:'northHall',toColumn:13,toRow:18},
@@ -24,6 +25,9 @@ class Rooms{
             },
             eastHall: {
                 data: Rooms.convertToLevelData(RoomData.eastHall),
+                signs: [
+                    {column:2,row:6,text:'Hey, look! A key! Way over there...'}
+                ],
                 exits: [
                     {fromColumn:0,fromRow:7,toRoom:'start',toColumn:18,toRow:7}
                 ]
