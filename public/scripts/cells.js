@@ -64,4 +64,15 @@ class Cells{
     static isItem(cell){
         return cell == CELL_KEY_CYAN || cell == CELL_KEY_MAGENTA || cell == CELL_KEY_YELLOW || cell == CELL_TORCH;
     }
+    static isLit(cell,dx,dy){
+        if(cell==CELL_AVATAR){
+            if(Math.abs(dx)>1 || Math.abs(dy)>1){
+                return Avatar.hasInventory(CELL_TORCH);
+            }else{
+                return true;
+            }
+        }else{
+            return cell == CELL_TORCH;
+        }
+    }
 }

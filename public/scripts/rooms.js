@@ -41,6 +41,9 @@ class Rooms{
             southHall: {
                 lit: true,
                 data: Rooms.convertToLevelData(RoomData.southHall),
+                signs: [
+                    {column:9,row:11,text:'(This game is a WIP. This is as far as it goes, for now!)'}
+                ],
                 exits: [
                     {fromColumn:8,fromRow:0,toRoom:'start',toColumn:8,toRow:18}
                 ]
@@ -48,6 +51,12 @@ class Rooms{
             westHall: {
                 lit: false,
                 data: Rooms.convertToLevelData(RoomData.westHall),
+                signs: [
+                    {column:17,row:13,text:'It\'s dark in here! Better find a light source!'},
+                    {column:9,row:11,text:'Hey! A torch!'},
+                    {column:11,row:15,text:'Wonder what this key opens?'},
+                    {column:8,row:18,text:'*ANOTHER* locked door?'}
+                ],
                 exits: [
                     {fromColumn:19,fromRow:14,toRoom:'start',toColumn:1,toRow:14}
                 ]
@@ -94,5 +103,26 @@ class Rooms{
             }
         }
         return null;
+    }
+    static isRoomLit(room){
+        return rooms[room].lit;
+    }
+    static isLit(room,column,row){
+        if(Rooms.isRoomLit(room)){
+            return true;
+        }else{
+            for(let dx = -2;dx<=2;++dx){
+                for(let dy = -2; dy<=2;++dy){
+                    let x = column + dx;
+                    let y = row + dy;
+                    if(x>0 && y>0 && x<ROOM_COLUMNS && y<ROOM_ROWS){
+                        if(Cells.isLit(Rooms.getCell(room,x,y),dx,dy)){
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
