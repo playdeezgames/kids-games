@@ -10,6 +10,9 @@ const SPRITE_KEY_MAGENTA = "key-magenta";
 const SPRITE_KEY_YELLOW = "key-yellow";
 const SPRITE_TORCH = "torch";
 const SPRITE_DARKNESS = "darkness";
+const SPRITE_CAT = "cat";
+const SPRITE_FISHBONE = "fishbone";
+const SPRITE_MAGIC_PORTAL = "magic-portal";
 
 const SPRITE_SIGN_BIG = "sign-big";
 const SPRITE_CONTROLS_BIG = "controls-big";
@@ -31,6 +34,9 @@ class Sprites{
         spriteImages[SPRITE_KEY_YELLOW] = loadImage('assets/images/key-yellow.png');
         spriteImages[SPRITE_TORCH] = loadImage('assets/images/torch.png');
         spriteImages[SPRITE_DARKNESS] = loadImage('assets/images/darkness.png');
+        spriteImages[SPRITE_CAT] = loadImage('assets/images/cat.png');
+        spriteImages[SPRITE_FISHBONE] = loadImage('assets/images/fishbone.png');
+        spriteImages[SPRITE_MAGIC_PORTAL] = loadImage('assets/images/magic-portal.png');
 
         spriteImages[SPRITE_SIGN_BIG] = loadImage('assets/images/wooden-sign-320.png');
         spriteImages[SPRITE_CONTROLS_BIG] = loadImage('assets/images/controls-320.png');

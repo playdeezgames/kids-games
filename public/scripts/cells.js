@@ -10,6 +10,8 @@ const CELL_KEY_MAGENTA = 8;
 const CELL_KEY_YELLOW = 9;
 const CELL_AVATAR = 10;
 const CELL_TORCH = 11;
+const CELL_CAT = 12;
+const CELL_FISHBONE = 13;
 
 let cellSprites = {};
 cellSprites[CELL_WALL]=SPRITE_WALL;
@@ -23,6 +25,8 @@ cellSprites[CELL_KEY_CYAN]    = SPRITE_KEY_CYAN;
 cellSprites[CELL_KEY_MAGENTA] = SPRITE_KEY_MAGENTA;
 cellSprites[CELL_KEY_YELLOW]  = SPRITE_KEY_YELLOW;
 cellSprites[CELL_TORCH] = SPRITE_TORCH;
+cellSprites[CELL_CAT] = SPRITE_CAT;
+cellSprites[CELL_FISHBONE] = SPRITE_FISHBONE;
 class Cells{
     static getSprite(cell){
         return cellSprites[cell];
@@ -40,6 +44,8 @@ class Cells{
             return CELL_KEY_MAGENTA;
         }else if(cell==CELL_WOOD_DOOR_YELLOW){
             return CELL_KEY_YELLOW;
+        }else if(cell==CELL_CAT){
+            return CELL_FISHBONE;
         }else{
             return null;
         }
@@ -51,6 +57,8 @@ class Cells{
             return CELL_WOOD_DOOR;
         }else if(cell==CELL_WOOD_DOOR_YELLOW){
             return CELL_WOOD_DOOR;
+        }else if(cell==CELL_CAT){
+            return CELL_FLOOR;
         }else{
             return cell;
         }
@@ -62,7 +70,7 @@ class Cells{
         return cell == CELL_WOOD_DOOR;
     }
     static isItem(cell){
-        return cell == CELL_KEY_CYAN || cell == CELL_KEY_MAGENTA || cell == CELL_KEY_YELLOW || cell == CELL_TORCH;
+        return cell == CELL_KEY_CYAN || cell == CELL_KEY_MAGENTA || cell == CELL_KEY_YELLOW || cell == CELL_TORCH || cell == CELL_FISHBONE;
     }
     static isLit(cell,dx,dy){
         if(cell==CELL_AVATAR){

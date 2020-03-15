@@ -42,6 +42,7 @@ class Rooms{
                 lit: true,
                 data: Rooms.convertToLevelData(RoomData.southHall),
                 signs: [
+                    {column:15,row:2,text:'The cat looks hungry....'},
                     {column:9,row:11,text:'(This game is a WIP. This is as far as it goes, for now!)'}
                 ],
                 exits: [
