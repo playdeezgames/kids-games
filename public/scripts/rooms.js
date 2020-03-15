@@ -5,6 +5,7 @@ class Rooms{
     static reset(){
         rooms = {
             start: {
+                lit: true,
                 data: Rooms.convertToLevelData(RoomData.start),
                 signs: [
                     {column:3,row:17,text:'This is a sign! Signs give you hints what to do next!'},
@@ -18,12 +19,17 @@ class Rooms{
                 ]
             },
             northHall: {
+                lit: true,
                 data: Rooms.convertToLevelData(RoomData.northHall),
+                signs: [
+                    {column:14,row:17,text:'Now this is just ridiculous!'}
+                ],
                 exits: [
                     {fromColumn:13,fromRow:19,toRoom:'start',toColumn:13,toRow:1}
                 ]
             },
             eastHall: {
+                lit: true,
                 data: Rooms.convertToLevelData(RoomData.eastHall),
                 signs: [
                     {column:2,row:6,text:'Hey, look! A key! Way over there...'}
@@ -33,12 +39,14 @@ class Rooms{
                 ]
             },
             southHall: {
+                lit: true,
                 data: Rooms.convertToLevelData(RoomData.southHall),
                 exits: [
                     {fromColumn:8,fromRow:0,toRoom:'start',toColumn:8,toRow:18}
                 ]
             },
             westHall: {
+                lit: false,
                 data: Rooms.convertToLevelData(RoomData.westHall),
                 exits: [
                     {fromColumn:19,fromRow:14,toRoom:'start',toColumn:1,toRow:14}

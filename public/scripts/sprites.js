@@ -8,6 +8,8 @@ const SPRITE_WOOD_DOOR_YELLOW = "wood-door-yellow";
 const SPRITE_KEY_CYAN = "key-cyan";
 const SPRITE_KEY_MAGENTA = "key-magenta";
 const SPRITE_KEY_YELLOW = "key-yellow";
+const SPRITE_TORCH = "torch";
+
 const SPRITE_SIGN_BIG = "sign-big";
 const SPRITE_CONTROLS_BIG = "controls-big"
 let spriteImages = {
@@ -25,6 +27,7 @@ class Sprites{
         spriteImages[SPRITE_KEY_CYAN] = loadImage('assets/images/key-cyan.png');
         spriteImages[SPRITE_KEY_MAGENTA] = loadImage('assets/images/key-magenta.png');
         spriteImages[SPRITE_KEY_YELLOW] = loadImage('assets/images/key-yellow.png');
+        spriteImages[SPRITE_TORCH] = loadImage('assets/images/torch.png');
 
         spriteImages[SPRITE_SIGN_BIG] = loadImage('assets/images/wooden-sign-320.png');
         spriteImages[SPRITE_CONTROLS_BIG] = loadImage('assets/images/controls-320.png');
