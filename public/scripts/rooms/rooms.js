@@ -88,6 +88,10 @@ class Rooms{
                     if(triggered[sink.name]){
                         if(sink.type==TRIGGERTYPE_SWITCH){
                             Rooms.setCell(room,sink.column,sink.row,sink.value);
+                        }else if(sink.type==TRIGGERTYPE_TOGGLE){
+                            let old = Rooms.getCell(room, sink.column, sink.row);
+                            Rooms.setCell(room,sink.column,sink.row,sink.value);
+                            sink.value = old;
                         }
                     }
                 }

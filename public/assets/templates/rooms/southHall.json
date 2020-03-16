@@ -10,12 +10,15 @@
     ],
     "triggers": {
         "sources": [
-            {"column":14, "row":4, "name":"wall-trap"}
+            {"column":14, "row": 4, "name":"wall-trap"},
+            {"column":18, "row":18, "name":"lever"}
         ],
         "sinks": [
-            {"column":14, "row":3, "type":"switch", "name":"wall-trap", "value":1},
-            {"column":14, "row":4, "type":"switch", "name":"wall-trap", "value":0},
-            {"column":16, "row":8, "type":"switch", "name":"wall-trap", "value":0}
+            {"column":14, "row": 3, "type":"switch", "name":"wall-trap", "value": 1},
+            {"column":14, "row": 4, "type":"switch", "name":"wall-trap", "value": 0},
+            {"column":16, "row": 8, "type":"switch", "name":"wall-trap", "value": 0},
+            {"column":18, "row":18, "type":"toggle", "name":"lever"    , "value":17},
+            {"column":13, "row":16, "type":"toggle", "name":"lever"    , "value": 0}
         ]
     }
 }

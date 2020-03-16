@@ -39,7 +39,11 @@ class Cells{
         return cellSprites[cell];
     }
     static isBlocking(cell){
-        return cell == CELL_WALL || Cells.isSign(cell) || Cells.isLocked(cell);
+        return cell == CELL_WALL 
+            || cell == CELL_LEVER_GREEN
+            || cell == CELL_LEVER_RED
+            || Cells.isSign(cell) 
+            || Cells.isLocked(cell);
     }
     static isLocked(cell){
         return Cells.getKey(cell)!=null;
