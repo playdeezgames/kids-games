@@ -3,6 +3,7 @@ const SCREEN_WIDTH = 960;
 const SCREEN_HEIGHT = 640;
 const BACKGROUND_COLOR = "#555555";
 const SIGNTEXT_COLOR = "#000000";
+const INVENTORYTEXT_COLOR = "#008080";
 const UPDATE_TIMER = 200;
 let updateTimer = 0;
 class Game{
@@ -124,7 +125,13 @@ class Game{
         let inventoryCells = Avatar.getInventoryCells();
         for(let index in inventoryCells){
             let cell = inventoryCells[index];
-            Sprites.render(Cells.getSprite(cell),Plotter.plotInventoryX(index),Plotter.plotInventoryY(index));
+            let x = Plotter.plotInventoryX(index);
+            let y = Plotter.plotInventoryY(index);
+            Sprites.render(Cells.getSprite(cell), x, y);
+            textAlign(RIGHT, BOTTOM);
+            textSize(INVENTORYTEXT_SIZE);
+            fill(INVENTORYTEXT_COLOR);
+            text(String(Avatar.getInventory(cell)),x,y,INVENTORY_COLUMN_WIDTH, INVENTORY_ROW_HEIGHT);
         }
     }
     static draw(){

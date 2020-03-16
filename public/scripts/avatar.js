@@ -1,17 +1,20 @@
-const START_COLUMN = 1;
-const START_ROW = 18;
-const START_ROOM = "start";
+const AVATAR_START_COLUMN = 1;
+const AVATAR_START_ROW = 18;
+const AVATAR_START_ROOM = "start";
+const AVATAR_MAXIMUM_HEALTH = 10;
 let avatar ={
-    column: START_COLUMN,
-    row: START_ROW,
-    room: START_ROOM,
+    column: AVATAR_START_COLUMN,
+    row: AVATAR_START_ROW,
+    room: AVATAR_START_ROOM,
+    health: AVATAR_MAXIMUM_HEALTH,
     inventory: {}
 };
 class Avatar{
     static reset(){
-        Avatar.column = START_COLUMN;
-        Avatar.row = START_ROW;
-        Avatar.room = START_ROOM;
+        Avatar.column = AVATAR_START_COLUMN;
+        Avatar.row = AVATAR_START_ROW;
+        Avatar.room = AVATAR_START_ROOM;
+        Avatar.health = AVATAR_MAXIMUM_HEALTH;
         Avatar.bumpColumn = null;
         Avatar.bumpRow = null;
         Avatar.clearInventory();
