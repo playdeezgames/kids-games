@@ -84,5 +84,11 @@ class Avatar{
         }
         return result;
     }
+    static get health(){
+        return avatar.health;
+    }
+    static set health(value){
+        avatar.health = value;
+    }
     
 }

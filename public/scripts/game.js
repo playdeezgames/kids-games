@@ -141,10 +141,20 @@ class Game{
             text(String(Avatar.getInventory(cell)),x,y,INVENTORY_COLUMN_WIDTH, INVENTORY_ROW_HEIGHT);
         }
     }
+    static drawHealth(){
+        for(let index=0;index<AVATAR_MAXIMUM_HEALTH;++index){
+            let sprite = SPRITE_HEART_EMPTY;
+            if(index<Avatar.health){
+                sprite = SPRITE_HEART_FULL;
+            }
+            Sprites.render(sprite, Plotter.plotHealthX(index), Plotter.plotHealthY(index));
+        }
+    }
     static draw(){
         background(BACKGROUND_COLOR);
         Game.drawMap();
         Game.drawZoom();
         Game.drawInventory();
+        Game.drawHealth();
     }
 }
