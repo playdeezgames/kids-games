@@ -14,8 +14,12 @@ const CELL_CAT = 12;
 const CELL_FISHBONE = 13;
 const CELL_MAGIC_PORTAL = 14;
 const CELL_TRAP = 15;
+const CELL_LEVER_RED = 16;
+const CELL_LEVER_GREEN = 17;
 
 let cellSprites = {};
+cellSprites[CELL_LEVER_RED]=SPRITE_LEVER_RED;
+cellSprites[CELL_LEVER_GREEN]=SPRITE_LEVER_GREEN;
 cellSprites[CELL_WALL]=SPRITE_WALL;
 cellSprites[CELL_AVATAR]=SPRITE_AVATAR;
 cellSprites[CELL_SIGN]=SPRITE_SIGN;
@@ -39,6 +43,11 @@ class Cells{
     }
     static isLocked(cell){
         return Cells.getKey(cell)!=null;
+    }
+    static isTrigger(cell){
+        return cell == CELL_TRAP
+            || cell == CELL_LEVER_GREEN
+            || cell == CELL_LEVER_RED
     }
     static getKey(cell){
         if(cell==CELL_WOOD_DOOR_CYAN){
@@ -73,7 +82,11 @@ class Cells{
         return cell == CELL_WOOD_DOOR;
     }
     static isItem(cell){
-        return cell == CELL_KEY_CYAN || cell == CELL_KEY_MAGENTA || cell == CELL_KEY_YELLOW || cell == CELL_TORCH || cell == CELL_FISHBONE;
+        return cell == CELL_KEY_CYAN 
+            || cell == CELL_KEY_MAGENTA 
+            || cell == CELL_KEY_YELLOW 
+            || cell == CELL_TORCH 
+            || cell == CELL_FISHBONE;
     }
     static isLit(cell,dx,dy){
         if(cell==CELL_AVATAR){

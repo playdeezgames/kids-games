@@ -1,68 +1,14 @@
-
-
+const TRIGGERTYPE_SWITCH = "switch";
+const TRIGGERTYPE_TOGGLE = "toggle";
 let rooms = {};
 class Rooms{
     static reset(){
-        rooms = {
-            start: {
-                lit: true,
-                data: Rooms.convertToLevelData(RoomData.start),
-                signs: [
-                    {column:3,row:17,text:'This is a sign! Signs give you hints what to do next!'},
-                    {column:9,row:9,text:'Most of these doors look locked, but what about that one to the right?'}
-                ],
-                exits: [
-                    {fromColumn:13,fromRow:0,toRoom:'northHall',toColumn:13,toRow:18},
-                    {fromColumn:19,fromRow:7,toRoom:'eastHall',toColumn:1,toRow:7},
-                    {fromColumn:8,fromRow:19,toRoom:'southHall',toColumn:8,toRow:1},
-                    {fromColumn:0,fromRow:14,toRoom:'westHall',toColumn:18,toRow:14}
-                ]
-            },
-            northHall: {
-                lit: true,
-                data: Rooms.convertToLevelData(RoomData.northHall),
-                signs: [
-                    {column:14,row:17,text:'Now this is just ridiculous!'}
-                ],
-                exits: [
-                    {fromColumn:13,fromRow:19,toRoom:'start',toColumn:13,toRow:1}
-                ]
-            },
-            eastHall: {
-                lit: true,
-                data: Rooms.convertToLevelData(RoomData.eastHall),
-                signs: [
-                    {column:2,row:6,text:'Hey, look! A key! Way over there...'}
-                ],
-                exits: [
-                    {fromColumn:0,fromRow:7,toRoom:'start',toColumn:18,toRow:7}
-                ]
-            },
-            southHall: {
-                lit: true,
-                data: Rooms.convertToLevelData(RoomData.southHall),
-                signs: [
-                    {column:15,row:2,text:'The cat looks hungry....'},
-                    {column:9,row:11,text:'(This game is a WIP. This is as far as it goes, for now!)'}
-                ],
-                exits: [
-                    {fromColumn:8,fromRow:0,toRoom:'start',toColumn:8,toRow:18}
-                ]
-            },
-            westHall: {
-                lit: false,
-                data: Rooms.convertToLevelData(RoomData.westHall),
-                signs: [
-                    {column:17,row:13,text:'It\'s dark in here! Better find a light source!'},
-                    {column:9,row:11,text:'Hey! A torch!'},
-                    {column:11,row:15,text:'Wonder what this key opens?'},
-                    {column:8,row:18,text:'*ANOTHER* locked door?'}
-                ],
-                exits: [
-                    {fromColumn:19,fromRow:14,toRoom:'start',toColumn:1,toRow:14}
-                ]
-            }
-        };
+        rooms = {};
+        for(let k in RoomIds.ids){
+            let roomId = RoomIds.ids[k];
+            rooms[roomId] = RoomTemplates.copyTemplate(roomId);
+            rooms[roomId].data = Rooms.convertToLevelData(RoomData.getData(roomId));
+        }
     }
     static convertToLevelData(lines){
         let level = [];
@@ -125,5 +71,27 @@ class Rooms{
             }
         }
         return false;
+    }
+    static activateTriggers(room,column,row){
+        if(rooms[room].triggers!=null){
+            let triggers = rooms[room].triggers;
+            if(triggers!=null && triggers.sources!=null && triggers.sinks!=null){
+                let triggered = {};
+                for(let index in triggers.sources){
+                    let source = triggers.sources[index];
+                    if(source.column==column && source.row==row){
+                        triggered[source.name]=true;
+                    }
+                }
+                for(let index in triggers.sinks){
+                    let sink = triggers.sinks[index];
+                    if(triggered[sink.name]){
+                        if(sink.type==TRIGGERTYPE_SWITCH){
+                            Rooms.setCell(room,sink.column,sink.row,sink.value);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,9 @@
+{
+    "lit": true,
+    "signs": [
+        {"column":14,"row":17,"text":"Now this is just ridiculous!"}
+    ],
+    "exits": [
+        {"fromColumn":13,"fromRow":19,"toRoom":"start","toColumn":13,"toRow":1}
+    ]
+}

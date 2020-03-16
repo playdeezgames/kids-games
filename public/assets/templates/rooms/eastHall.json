@@ -1,0 +1,9 @@
+{
+    "lit": true,
+    "signs": [
+        {"column":2,"row":6,"text":"Hey, look! A key! Way over there..."}
+    ],
+    "exits": [
+        {"fromColumn":0,"fromRow":7,"toRoom":"start","toColumn":18,"toRow":7}
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "lit": true,
+    "signs": [
+        {"column":15, "row": 2, "text":"The cat looks hungry...."},
+        {"column": 9, "row":11, "text":"(This game is a WIP. This is as far as it goes, for now!)"},
+        {"column":15, "row": 4, "text":"Walking on certain squares can make stuff appear (or disappear!)"}
+    ],
+    "exits": [
+        {"fromColumn":8,"fromRow":0,"toRoom":"start","toColumn":8,"toRow":18}
+    ],
+    "triggers": {
+        "sources": [
+            {"column":14, "row":4, "name":"wall-trap"}
+        ],
+        "sinks": [
+            {"column":14, "row":3, "type":"switch", "name":"wall-trap", "value":1},
+            {"column":14, "row":4, "type":"switch", "name":"wall-trap", "value":0},
+            {"column":16, "row":8, "type":"switch", "name":"wall-trap", "value":0}
+        ]
+    }
+}

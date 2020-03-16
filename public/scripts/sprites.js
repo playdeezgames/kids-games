@@ -15,6 +15,8 @@ const SPRITE_FISHBONE = "fishbone";
 const SPRITE_MAGIC_PORTAL = "magic-portal";
 const SPRITE_HEART_FULL = "heart-full";
 const SPRITE_HEART_EMPTY = "heart-empty";
+const SPRITE_LEVER_GREEN = "lever-green";
+const SPRITE_LEVER_RED = "lever-red";
 
 const SPRITE_SIGN_BIG = "sign-big";
 const SPRITE_CONTROLS_BIG = "controls-big";
@@ -24,6 +26,8 @@ let spriteImages = {
 };
 class Sprites{
     static load(){
+        spriteImages[SPRITE_LEVER_GREEN]       = loadImage('assets/images/lever-green.png');
+        spriteImages[SPRITE_LEVER_RED]         = loadImage('assets/images/lever-red.png');
         spriteImages[SPRITE_HEART_FULL]        = loadImage('assets/images/hearts-full.png');
         spriteImages[SPRITE_HEART_EMPTY]       = loadImage('assets/images/hearts-empty.png');
         spriteImages[SPRITE_AVATAR]            = loadImage('assets/images/meeple.png');

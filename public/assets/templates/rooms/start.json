@@ -1,0 +1,13 @@
+{
+    "lit": true,
+    "signs": [
+        {"column":3,"row":17,"text":"This is a sign! Signs give you hints what to do next!"},
+        {"column":9,"row":9,"text":"Most of these doors look locked, but what about that one to the right?"}
+    ],
+    "exits": [
+        {"fromColumn":13,"fromRow":0,"toRoom":"northHall","toColumn":13,"toRow":18},
+        {"fromColumn":19,"fromRow":7,"toRoom":"eastHall","toColumn":1,"toRow":7},
+        {"fromColumn":8,"fromRow":19,"toRoom":"southHall","toColumn":8,"toRow":1},
+        {"fromColumn":0,"fromRow":14,"toRoom":"westHall","toColumn":18,"toRow":14}
+    ]
+}

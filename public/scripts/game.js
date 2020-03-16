@@ -9,6 +9,7 @@ let updateTimer = 0;
 class Game{
     static preload(){
         RoomData.load();
+        RoomTemplates.load();
         Sprites.load();
     }
     static reset(){
@@ -51,6 +52,9 @@ class Game{
                                 //TODO: make sound
                                 Rooms.setCell(Avatar.room, nextColumn, nextRow,Cells.unlock(cell));
                             }
+                        }else if(Cells.isTrigger(cell)){
+                            //bump trigger
+                            Rooms.activateTriggers(Avatar.room, nextColumn, nextRow);
                         }
                         Avatar.bumpColumn = nextColumn;
                         Avatar.bumpRow = nextRow;
@@ -71,6 +75,9 @@ class Game{
                             nextRow = exit.toRow;
                             //TODO: play a sound!
                         }
+                    }else if(Cells.isTrigger(cell)){
+                        //walking trigger
+                        Rooms.activateTriggers(Avatar.room, nextColumn, nextRow);
                     }else if(Cells.isItem(cell)){
                         Avatar.addInventory(cell);
                         Rooms.setCell(Avatar.room,nextColumn,nextRow,CELL_FLOOR);

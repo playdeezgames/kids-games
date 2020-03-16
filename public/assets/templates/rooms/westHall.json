@@ -1,0 +1,12 @@
+{
+    "lit": false,
+    "signs": [
+        {"column":17,"row":13,"text":"It's dark in here! Better find a light source!"},
+        {"column":9,"row":11,"text":"Hey! A torch!"},
+        {"column":11,"row":15,"text":"Wonder what this key opens?"},
+        {"column":8,"row":18,"text":"*ANOTHER* locked door?"}
+    ],
+    "exits": [
+        {"fromColumn":19,"fromRow":14,"toRoom":"start","toColumn":1,"toRow":14}
+    ]
+}
