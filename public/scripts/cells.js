@@ -12,6 +12,8 @@ const CELL_AVATAR = 10;
 const CELL_TORCH = 11;
 const CELL_CAT = 12;
 const CELL_FISHBONE = 13;
+const CELL_MAGIC_PORTAL = 14;
+const CELL_TRAP = 15;
 
 let cellSprites = {};
 cellSprites[CELL_WALL]=SPRITE_WALL;
@@ -27,6 +29,7 @@ cellSprites[CELL_KEY_YELLOW]  = SPRITE_KEY_YELLOW;
 cellSprites[CELL_TORCH] = SPRITE_TORCH;
 cellSprites[CELL_CAT] = SPRITE_CAT;
 cellSprites[CELL_FISHBONE] = SPRITE_FISHBONE;
+cellSprites[CELL_MAGIC_PORTAL] = SPRITE_MAGIC_PORTAL;
 class Cells{
     static getSprite(cell){
         return cellSprites[cell];
