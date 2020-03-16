@@ -19,7 +19,7 @@ const SPRITE_CONTROLS_BIG = "controls-big";
 const SPRITE_INVENTORY_PANEL = "inventory-panel";
 let spriteImages = {
 
-}
+};
 class Sprites{
     static load(){
         spriteImages[SPRITE_AVATAR] = loadImage('assets/images/meeple.png');
