@@ -98,4 +98,24 @@ class Rooms{
             }
         }
     }
+    static getThreatLevel(room,column,row){
+        if(column<0 || row<0 || column>=ROOM_COLUMNS || row>=ROOM_ROWS || Cells.isBlocking(Rooms.getCell(room,column,row))){
+            return 0;
+        }else{
+            let level = 0;
+            if(column>0){
+                level += Cells.getThreatLevel(Rooms.getCell(room,column-1,row));
+            }
+            if(row>0){
+                level += Cells.getThreatLevel(Rooms.getCell(room,column,row-1));
+            }
+            if(column<ROOM_COLUMNS-1){
+                level += Cells.getThreatLevel(Rooms.getCell(room,column+1,row));
+            }
+            if(row<ROOM_ROWS-1){
+                level += Cells.getThreatLevel(Rooms.getCell(room,column,row+1));
+            }
+            return level;
+        }
+    }
 }

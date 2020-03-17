@@ -17,6 +17,10 @@ const SPRITE_HEART_FULL = "heart-full";
 const SPRITE_HEART_EMPTY = "heart-empty";
 const SPRITE_LEVER_GREEN = "lever-green";
 const SPRITE_LEVER_RED = "lever-red";
+const SPRITE_MINION = "bully-minion";
+const SPRITE_BROADSWORD = "broadsword";
+const SPRITE_SHIELD = "checked-shield";
+const SPRITE_THREAT = "threat-level";
 
 const SPRITE_SIGN_BIG = "sign-big";
 const SPRITE_CONTROLS_BIG = "controls-big";
@@ -26,6 +30,10 @@ let spriteImages = {
 };
 class Sprites{
     static load(){
+        spriteImages[SPRITE_THREAT]      = loadImage('assets/images/crossed-swords.png');
+        spriteImages[SPRITE_MINION]            = loadImage('assets/images/bully-minion.png');
+        spriteImages[SPRITE_BROADSWORD]        = loadImage('assets/images/broadsword.png');
+        spriteImages[SPRITE_SHIELD]            = loadImage('assets/images/checked-shield.png');
         spriteImages[SPRITE_LEVER_GREEN]       = loadImage('assets/images/lever-green.png');
         spriteImages[SPRITE_LEVER_RED]         = loadImage('assets/images/lever-red.png');
         spriteImages[SPRITE_HEART_FULL]        = loadImage('assets/images/hearts-full.png');

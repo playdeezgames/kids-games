@@ -4,6 +4,7 @@ const SCREEN_HEIGHT = 640;
 const BACKGROUND_COLOR = "#555555";
 const SIGNTEXT_COLOR = "#000000";
 const INVENTORYTEXT_COLOR = "#008080";
+const THREATTEXT_COLOR = "#000000"
 const UPDATE_TIMER = 200;
 let updateTimer = 0;
 class Game{
@@ -97,6 +98,14 @@ class Game{
             for(let column=0;column<ROOM_COLUMNS;++column){
                 let x = Plotter.plotRoomX(column,row);
                 let y = Plotter.plotRoomY(column,row);
+                let threat = Rooms.getThreatLevel(Avatar.room, column,row);
+                if(threat>0){
+                    Sprites.render(SPRITE_THREAT,x,y);
+                    textAlign(CENTER,CENTER);
+                    textSize(THREATTEXT_SIZE);
+                    fill(THREATTEXT_COLOR);
+                    text(String(threat),x,y,ROOM_COLUMN_WIDTH,ROOM_ROW_HEIGHT);
+                }
                 let cell = Rooms.getCell(Avatar.room,column,row);
                 let sprite = Cells.getSprite(cell);
                 if(!Rooms.isLit(Avatar.room, column, row) && cell!=CELL_AVATAR){

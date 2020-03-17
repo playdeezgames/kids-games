@@ -16,8 +16,14 @@ const CELL_MAGIC_PORTAL = 14;
 const CELL_TRAP = 15;
 const CELL_LEVER_RED = 16;
 const CELL_LEVER_GREEN = 17;
+const CELL_MINION = 18;
+const CELL_BROADSWORD = 19;
+const CELL_SHIELD = 20;
 
 let cellSprites = {};
+cellSprites[CELL_MINION]=SPRITE_MINION;
+cellSprites[CELL_BROADSWORD]=SPRITE_BROADSWORD;
+cellSprites[CELL_SHIELD]=SPRITE_SHIELD;
 cellSprites[CELL_LEVER_RED]=SPRITE_LEVER_RED;
 cellSprites[CELL_LEVER_GREEN]=SPRITE_LEVER_GREEN;
 cellSprites[CELL_WALL]=SPRITE_WALL;
@@ -42,6 +48,7 @@ class Cells{
         return cell == CELL_WALL 
             || cell == CELL_LEVER_GREEN
             || cell == CELL_LEVER_RED
+            || cell == CELL_MINION
             || Cells.isSign(cell) 
             || Cells.isLocked(cell);
     }
@@ -52,6 +59,13 @@ class Cells{
         return cell == CELL_TRAP
             || cell == CELL_LEVER_GREEN
             || cell == CELL_LEVER_RED
+    }
+    static getThreatLevel(cell){
+        if(cell == CELL_MINION){
+            return 1;
+        }else{
+            return 0;
+        }
     }
     static getKey(cell){
         if(cell==CELL_WOOD_DOOR_CYAN){
@@ -89,6 +103,8 @@ class Cells{
         return cell == CELL_KEY_CYAN 
             || cell == CELL_KEY_MAGENTA 
             || cell == CELL_KEY_YELLOW 
+            || cell == CELL_BROADSWORD
+            || cell == CELL_SHIELD
             || cell == CELL_TORCH 
             || cell == CELL_FISHBONE;
     }
