@@ -1,9 +1,10 @@
+[ ] South Hall Signs.
 [ ] Swords
 [ ] Coffin!
 [ ] Food
 [ ] Potion!
 [ ] Avatar loading from JSON
-[ ] Loot room in southern hall
+[ ] Loot Chamber South Hall
 [ ] Forest maze!
 [ ] Innkepper quest
 [ ] Cellar rats
