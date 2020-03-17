@@ -88,7 +88,29 @@ class Avatar{
         return avatar.health;
     }
     static set health(value){
+        if(value<0){
+            value = 0;
+        }else if(value>AVATAR_MAXIMUM_HEALTH){
+            value = AVATAR_MAXIMUM_HEALTH;
+        }
         avatar.health = value;
+    }
+    static applyThreat(threat){
+        if(threat>0){
+            //shields
+            let shields = Avatar.getInventory(CELL_SHIELD);
+            if(shields>threat){
+                Avatar.removeInventory(CELL_SHIELD,shields-threat);
+                threat = 0;
+            }else{
+                threat -= shields;
+                Avatar.removeInventory(CELL_SHIELD,shields);
+            }
+            //health
+            if(threat>0){
+                Avatar.health = Avatar.health - threat;
+            }
+        }
     }
     
 }

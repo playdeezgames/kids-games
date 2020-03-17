@@ -45,6 +45,7 @@ class Game{
                     Avatar.bumpColumn = null;
                     Avatar.bumpRow = null;
                     let cell = Rooms.getCell(Avatar.room, nextColumn, nextRow);
+                    let threat = Rooms.getThreatLevel(Avatar.room, nextColumn, nextRow);
                     if(Cells.isBlocking(cell)){
                         if(Cells.isLocked(cell)){
                             let key = Cells.getKey(cell);
@@ -61,6 +62,7 @@ class Game{
                         Avatar.bumpRow = nextRow;
                         nextColumn = Avatar.column;
                         nextRow = Avatar.row;
+                        threat = 0;
                     }else if (Cells.isExit(cell)){
                         let exit = Rooms.getExit(Avatar.room,nextColumn,nextRow);
                         if(exit!=null){
@@ -72,18 +74,19 @@ class Game{
                             Avatar.room = exit.toRoom;
                             Avatar.bumpColumn = null;
                             Avatar.bumpRow = null;
-                            nextColumn=exit.toColumn;
+                            nextColumn = exit.toColumn;
                             nextRow = exit.toRow;
+                            threat = 0;
                             //TODO: play a sound!
                         }
                     }else if(Cells.isTrigger(cell)){
-                        //walking trigger
                         Rooms.activateTriggers(Avatar.room, nextColumn, nextRow);
                     }else if(Cells.isItem(cell)){
                         Avatar.addInventory(cell);
                         Rooms.setCell(Avatar.room,nextColumn,nextRow,CELL_FLOOR);
                         //TODO: play a sound!
                     }
+                    Avatar.applyThreat(threat);
                     Avatar.column=nextColumn;
                     Avatar.row=nextRow;
                 }
