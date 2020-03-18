@@ -2,22 +2,14 @@ const AVATAR_START_COLUMN = 1;
 const AVATAR_START_ROW = 18;
 const AVATAR_START_ROOM = "start";
 const AVATAR_MAXIMUM_HEALTH = 10;
-let avatar ={
-    column: AVATAR_START_COLUMN,
-    row: AVATAR_START_ROW,
-    room: AVATAR_START_ROOM,
-    health: AVATAR_MAXIMUM_HEALTH,
-    inventory: {}
-};
+let avatar ={};
+let avatarTemplate = {};
 class Avatar{
+    static load(){
+        avatarTemplate = loadJSON('assets/templates/avatar.json');
+    }
     static reset(){
-        Avatar.column = AVATAR_START_COLUMN;
-        Avatar.row = AVATAR_START_ROW;
-        Avatar.room = AVATAR_START_ROOM;
-        Avatar.health = AVATAR_MAXIMUM_HEALTH;
-        Avatar.bumpColumn = null;
-        Avatar.bumpRow = null;
-        Avatar.clearInventory();
+        avatar = Utility.copy(avatarTemplate);
     }
     static clearInventory(){
         avatar.inventory={};
@@ -87,6 +79,16 @@ class Avatar{
     static get health(){
         return avatar.health;
     }
+    static get cell(){
+        if(Avatar.alive){
+            return CELL_AVATAR;
+        }else{
+            return CELL_COFFIN;
+        }
+    }
+    static get alive(){
+        return avatar.health>0;
+    }
     static set health(value){
         if(value<0){
             value = 0;
@@ -109,6 +111,19 @@ class Avatar{
             //health
             if(threat>0){
                 Avatar.health = Avatar.health - threat;
+            }
+        }
+    }
+    static eat(){
+        if(Avatar.alive){
+            if(Avatar.health < AVATAR_MAXIMUM_HEALTH && Avatar.hasInventory(CELL_CHICKEN_LEG)){
+                Avatar.removeInventory(CELL_CHICKEN_LEG);
+                Avatar.health += 1;
+            }
+        }else{
+            if(Avatar.hasInventory(CELL_HEALTH_POTION)){
+                Avatar.removeInventory(CELL_HEALTH_POTION);
+                Avatar.health = AVATAR_MAXIMUM_HEALTH;
             }
         }
     }
