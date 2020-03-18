@@ -21,16 +21,25 @@ const SPRITE_MINION = "bully-minion";
 const SPRITE_BROADSWORD = "broadsword";
 const SPRITE_SHIELD = "checked-shield";
 const SPRITE_THREAT = "threat-level";
+const SPRITE_CHICKEN_LEG = "chicken-leg";
+const SPRITE_HEALTH_POTION = "health-potion";
+const SPRITE_COFFIN = "coffin";
 
 const SPRITE_SIGN_BIG = "sign-big";
 const SPRITE_CONTROLS_BIG = "controls-big";
+const SPRITE_COFFIN_BIG = "coffin-big";
 const SPRITE_INVENTORY_PANEL = "inventory-panel";
+
 let spriteImages = {
 
 };
 class Sprites{
     static load(){
-        spriteImages[SPRITE_THREAT]      = loadImage('assets/images/crossed-swords.png');
+        spriteImages[SPRITE_CHICKEN_LEG]       = loadImage('assets/images/chicken-leg.png');
+        spriteImages[SPRITE_HEALTH_POTION]     = loadImage('assets/images/health-potion.png');
+        spriteImages[SPRITE_COFFIN]            = loadImage('assets/images/coffin.png');
+        spriteImages[SPRITE_COFFIN_BIG]        = loadImage('assets/images/coffin-320.png');
+        spriteImages[SPRITE_THREAT]            = loadImage('assets/images/crossed-swords.png');
         spriteImages[SPRITE_MINION]            = loadImage('assets/images/bully-minion.png');
         spriteImages[SPRITE_BROADSWORD]        = loadImage('assets/images/broadsword.png');
         spriteImages[SPRITE_SHIELD]            = loadImage('assets/images/checked-shield.png');

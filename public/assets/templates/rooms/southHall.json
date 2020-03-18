@@ -2,8 +2,15 @@
     "lit": true,
     "signs": [
         {"column":15, "row": 2, "text":"The cat looks hungry...."},
-        {"column": 9, "row":11, "text":"(This game is a WIP. This is as far as it goes, for now!)"},
-        {"column":15, "row": 4, "text":"Walking on certain squares can make stuff appear (or disappear!)"}
+        {"column": 9, "row":11, "text":"Tutorial complete! Enter the portal... if you dare!"},
+        {"column":15, "row": 4, "text":"Walking on certain squares can make stuff appear (or disappear!)"},
+        {"column":17, "row":18, "text":"Sometimes there are switches to flip on and off!"},
+        {"column":12, "row":15, "text":"Beware monsters! They can hurt you if unprotected!"},
+        {"column": 1, "row":17, "text":"With weapons, you can slay the monsters!"},
+        {"column": 6, "row":15, "text":"Eating food recovers hearts!"},
+        {"column": 1, "row": 8, "text":"Feel along the wall for a secret door..."},
+        {"column": 5, "row": 4, "text":"Jackpot!"}
+
     ],
     "exits": [
         {"fromColumn":8,"fromRow":0,"toRoom":"start","toColumn":8,"toRow":18}
@@ -11,14 +18,20 @@
     "triggers": {
         "sources": [
             {"column":14, "row": 4, "name":"wall-trap"},
-            {"column":18, "row":18, "name":"lever"}
+            {"column":18, "row":18, "name":"lever"},
+            {"column": 5, "row": 8, "name":"treasure-room"},
+            {"column": 3, "row":10, "name":"secret-door"},
+            {"column": 5, "row":10, "name":"secret-door-shut"}
         ],
         "sinks": [
-            {"column":14, "row": 3, "type":"switch", "name":"wall-trap", "value": 1},
-            {"column":14, "row": 4, "type":"switch", "name":"wall-trap", "value": 0},
-            {"column":16, "row": 8, "type":"switch", "name":"wall-trap", "value": 0},
-            {"column":18, "row":18, "type":"toggle", "name":"lever"    , "value":17},
-            {"column":13, "row":16, "type":"toggle", "name":"lever"    , "value": 0}
+            {"column":14, "row": 3, "type":"switch", "name":"wall-trap"       , "value": 1},
+            {"column":14, "row": 4, "type":"switch", "name":"wall-trap"       , "value": 0},
+            {"column":16, "row": 8, "type":"switch", "name":"wall-trap"       , "value": 0},
+            {"column":18, "row":18, "type":"toggle", "name":"lever"           , "value":17},
+            {"column":13, "row":16, "type":"toggle", "name":"lever"           , "value": 0},
+            {"column": 4, "row":10, "type":"toggle", "name":"secret-door"     , "value": 0},
+            {"column": 4, "row":10, "type":"switch", "name":"secret-door-shut", "value": 1},
+            {"column": 5, "row": 7, "type":"switch", "name":"treasure-room"   , "value": 0}
         ]
     }
 }

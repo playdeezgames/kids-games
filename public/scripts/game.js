@@ -57,6 +57,12 @@ class Game{
                         }else if(Cells.isTrigger(cell)){
                             //bump trigger
                             Rooms.activateTriggers(Avatar.room, nextColumn, nextRow);
+                        }else if(Cells.isCreature(cell)){
+                            if(Avatar.hasInventory(CELL_BROADSWORD)){
+                                //TODO: kill monster sound
+                                Rooms.setCell(Avatar.room, nextColumn,nextRow, CELL_FLOOR);
+                                Avatar.removeInventory(CELL_BROADSWORD);
+                            }
                         }
                         Avatar.bumpColumn = nextColumn;
                         Avatar.bumpRow = nextRow;
@@ -77,16 +83,19 @@ class Game{
                             nextColumn = exit.toColumn;
                             nextRow = exit.toRow;
                             threat = 0;
-                            //TODO: play a sound!
+                            //TODO: play a travel sound!
                         }
                     }else if(Cells.isTrigger(cell)){
                         Rooms.activateTriggers(Avatar.room, nextColumn, nextRow);
                     }else if(Cells.isItem(cell)){
                         Avatar.addInventory(cell);
                         Rooms.setCell(Avatar.room,nextColumn,nextRow,CELL_FLOOR);
-                        //TODO: play a sound!
+                        //TODO: play an item pickup sound!
                     }
-                    Avatar.applyThreat(threat);
+                    if(threat>0){
+                        Avatar.applyThreat(threat);
+                        //TODO: get hit sound
+                    }
                     Avatar.column=nextColumn;
                     Avatar.row=nextRow;
                 }

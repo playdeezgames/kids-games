@@ -19,8 +19,14 @@ const CELL_LEVER_GREEN = 17;
 const CELL_MINION = 18;
 const CELL_BROADSWORD = 19;
 const CELL_SHIELD = 20;
+const CELL_HEALTH_POTION = 21;
+const CELL_CHICKEN_LEG = 22;
+const CELL_COFFIN = 23;
 
 let cellSprites = {};
+cellSprites[CELL_HEALTH_POTION]=SPRITE_HEALTH_POTION;
+cellSprites[CELL_CHICKEN_LEG]=SPRITE_CHICKEN_LEG;
+cellSprites[CELL_COFFIN]=SPRITE_COFFIN;
 cellSprites[CELL_MINION]=SPRITE_MINION;
 cellSprites[CELL_BROADSWORD]=SPRITE_BROADSWORD;
 cellSprites[CELL_SHIELD]=SPRITE_SHIELD;
@@ -59,6 +65,9 @@ class Cells{
         return cell == CELL_TRAP
             || cell == CELL_LEVER_GREEN
             || cell == CELL_LEVER_RED
+    }
+    static isCreature(cell){
+        return cell == CELL_MINION;
     }
     static getThreatLevel(cell){
         if(cell == CELL_MINION){
@@ -106,6 +115,8 @@ class Cells{
             || cell == CELL_BROADSWORD
             || cell == CELL_SHIELD
             || cell == CELL_TORCH 
+            || cell == CELL_HEALTH_POTION
+            || cell == CELL_CHICKEN_LEG
             || cell == CELL_FISHBONE;
     }
     static isLit(cell,dx,dy){
