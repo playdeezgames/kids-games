@@ -22,8 +22,11 @@ const CELL_SHIELD = 20;
 const CELL_HEALTH_POTION = 21;
 const CELL_CHICKEN_LEG = 22;
 const CELL_COFFIN = 23;
+const CELL_MOVE = 24;
+const CELL_TREE = 25;
 
 let cellSprites = {};
+cellSprites[CELL_TREE]=SPRITE_TREE;
 cellSprites[CELL_HEALTH_POTION]=SPRITE_HEALTH_POTION;
 cellSprites[CELL_CHICKEN_LEG]=SPRITE_CHICKEN_LEG;
 cellSprites[CELL_COFFIN]=SPRITE_COFFIN;
@@ -52,6 +55,7 @@ class Cells{
     }
     static isBlocking(cell){
         return cell == CELL_WALL 
+            || cell == CELL_TREE
             || cell == CELL_LEVER_GREEN
             || cell == CELL_LEVER_RED
             || cell == CELL_MINION
@@ -106,8 +110,8 @@ class Cells{
         return cell == CELL_SIGN;
     }
     static isExit(cell){
-        return cell == CELL_WOOD_DOOR || 
-            cell == CELL_MAGIC_PORTAL;
+        return cell == CELL_WOOD_DOOR 
+            || cell == CELL_MAGIC_PORTAL;
     }
     static isItem(cell){
         return cell == CELL_KEY_CYAN 

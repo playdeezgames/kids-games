@@ -1,6 +1,7 @@
 {
     "lit": true,
     "signs": [
+        {"column": 1, "row": 1, "text":"Now that you've made it out of the tutorial, the game can really begin!"}
     ],
     "exits": [
     ]
