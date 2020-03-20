@@ -106,7 +106,8 @@ class Cells{
         return cell == CELL_SIGN;
     }
     static isExit(cell){
-        return cell == CELL_WOOD_DOOR;
+        return cell == CELL_WOOD_DOOR || 
+            cell == CELL_MAGIC_PORTAL;
     }
     static isItem(cell){
         return cell == CELL_KEY_CYAN 

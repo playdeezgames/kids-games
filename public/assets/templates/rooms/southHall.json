@@ -13,7 +13,8 @@
 
     ],
     "exits": [
-        {"fromColumn":8,"fromRow":0,"toRoom":"start","toColumn":8,"toRow":18}
+        {"fromColumn":8,"fromRow":0,"toRoom":"start","toColumn":8,"toRow":18},
+        {"fromColumn":11,"fromRow":11,"toRoom":"outset","toColumn":2,"toRow":1}
     ],
     "triggers": {
         "sources": [

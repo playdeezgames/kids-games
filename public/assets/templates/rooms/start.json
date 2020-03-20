@@ -8,6 +8,19 @@
         {"fromColumn":13,"fromRow":0,"toRoom":"northHall","toColumn":13,"toRow":18},
         {"fromColumn":19,"fromRow":7,"toRoom":"eastHall","toColumn":1,"toRow":7},
         {"fromColumn":8,"fromRow":19,"toRoom":"southHall","toColumn":8,"toRow":1},
-        {"fromColumn":0,"fromRow":14,"toRoom":"westHall","toColumn":18,"toRow":14}
-    ]
+        {"fromColumn":0,"fromRow":14,"toRoom":"westHall","toColumn":18,"toRow":14},
+        {"fromColumn":18,"fromRow":1,"toRoom":"outset","toColumn":2,"toRow":1}
+    ],
+    "triggers": {
+        "sources": [
+            {"column":18, "row": 18, "name":"latch-one"},
+            {"column": 1, "row":  1, "name":"latch-two"}
+        ],
+        "sinks": [
+            {"column":18, "row":18, "type":"switch", "name":"latch-one", "value": 0},
+            {"column": 1, "row": 1, "type":"switch", "name":"latch-one", "value":15},
+            {"column": 1, "row": 1, "type":"switch", "name":"latch-two", "value": 0},
+            {"column":18, "row": 1, "type":"switch", "name":"latch-two", "value":14}
+        ]
+    }
 }
