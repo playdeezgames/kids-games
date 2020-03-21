@@ -186,11 +186,21 @@ class Game{
             Sprites.render(sprite, Plotter.plotHealthX(index), Plotter.plotHealthY(index));
         }
     }
+    static drawEnergy(){
+        for(let index=0;index<AVATAR_MAXIMUM_ENERGY;++index){
+            let sprite = SPRITE_ENERGY_EMPTY;
+            if(index<Avatar.energy){
+                sprite = SPRITE_ENERGY_FULL;
+            }
+            Sprites.render(sprite, Plotter.plotEnergyX(index), Plotter.plotEnergyY(index));
+        }
+    }
     static draw(){
         background(BACKGROUND_COLOR);
         Game.drawMap();
         Game.drawZoom();
         Game.drawInventory();
         Game.drawHealth();
+        Game.drawEnergy();
     }
 }

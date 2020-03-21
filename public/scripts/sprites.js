@@ -25,6 +25,8 @@ const SPRITE_CHICKEN_LEG = "chicken-leg";
 const SPRITE_HEALTH_POTION = "health-potion";
 const SPRITE_COFFIN = "coffin";
 const SPRITE_TREE = "tree";
+const SPRITE_ENERGY_FULL = "rolling-energy-full";
+const SPRITE_ENERGY_EMPTY = "rolling-energy-empty";
 
 const SPRITE_SIGN_BIG = "sign-big";
 const SPRITE_CONTROLS_BIG = "controls-big";
@@ -36,6 +38,8 @@ let spriteImages = {
 };
 class Sprites{
     static load(){
+        spriteImages[SPRITE_ENERGY_FULL]       = loadImage('assets/images/rolling-energy-full.png');
+        spriteImages[SPRITE_ENERGY_EMPTY]      = loadImage('assets/images/rolling-energy-empty.png');
         spriteImages[SPRITE_TREE]              = loadImage('assets/images/pine-tree.png');
         spriteImages[SPRITE_CHICKEN_LEG]       = loadImage('assets/images/chicken-leg.png');
         spriteImages[SPRITE_HEALTH_POTION]     = loadImage('assets/images/health-potion.png');

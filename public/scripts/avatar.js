@@ -2,6 +2,7 @@ const AVATAR_START_COLUMN = 1;
 const AVATAR_START_ROW = 18;
 const AVATAR_START_ROOM = "start";
 const AVATAR_MAXIMUM_HEALTH = 10;
+const AVATAR_MAXIMUM_ENERGY = 10;
 let avatar ={};
 let avatarTemplate = {};
 class Avatar{
@@ -76,9 +77,6 @@ class Avatar{
         }
         return result;
     }
-    static get health(){
-        return avatar.health;
-    }
     static get cell(){
         if(Avatar.alive){
             return CELL_AVATAR;
@@ -89,13 +87,17 @@ class Avatar{
     static get alive(){
         return avatar.health>0;
     }
+    static get health(){
+        return avatar.health;
+    }
     static set health(value){
-        if(value<0){
-            value = 0;
-        }else if(value>AVATAR_MAXIMUM_HEALTH){
-            value = AVATAR_MAXIMUM_HEALTH;
-        }
-        avatar.health = value;
+        avatar.health = Utility.clamp(0,AVATAR_MAXIMUM_HEALTH,value);
+    }
+    static get energy(){
+        return avatar.energy;
+    }
+    static set energy(value){
+        avatar.energy = Utility.clamp(0,AVATAR_MAXIMUM_ENERGY,value);
     }
     static applyThreat(threat){
         if(threat>0){

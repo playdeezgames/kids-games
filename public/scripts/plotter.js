@@ -34,6 +34,12 @@ const HEALTH_PANEL_Y = INVENTORY_PANEL_Y + INVENTORY_PANEL_HEIGHT;
 const HEALTH_PANEL_COLUMN_WIDTH = 32;
 const HEALTH_PANEL_COLUMNS = 10;
 const HEALTH_PANEL_HEIGHT = 32;
+
+const ENERGY_PANEL_X = HEALTH_PANEL_X;
+const ENERGY_PANEL_Y = HEALTH_PANEL_Y + HEALTH_PANEL_HEIGHT;
+const ENERGY_PANEL_COLUMN_WIDTH = 32;
+const ENERGY_PANEL_COLUMNS = 10;
+const ENERGY_PANEL_HEIGHT = 32;
 class Plotter{
     static plotRoomX(column,row){
         return column * ROOM_COLUMN_WIDTH + ROOM_OFFSET_X;
@@ -53,5 +59,11 @@ class Plotter{
     }
     static plotHealthY(index){
         return HEALTH_PANEL_Y;
+    }
+    static plotEnergyX(index){
+        return ENERGY_PANEL_X + index * ENERGY_PANEL_COLUMN_WIDTH;
+    }
+    static plotEnergyY(index){
+        return ENERGY_PANEL_Y;
     }
 }
