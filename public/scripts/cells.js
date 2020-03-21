@@ -24,8 +24,18 @@ const CELL_CHICKEN_LEG = 22;
 const CELL_COFFIN = 23;
 const CELL_MOVE = 24;
 const CELL_TREE = 25;
+const CELL_BED = 26;
+const CELL_TREE_CHOPPABLE = 27;
+const CELL_WHET_STONE = 28;
+const CELL_AXE_USABLE = 29;
+const CELL_AXE_DULL = 30;
 
 let cellSprites = {};
+cellSprites[CELL_BED]=SPRITE_BED;
+cellSprites[CELL_TREE_CHOPPABLE]=SPRITE_TREE_CHOPPABLE;
+cellSprites[CELL_WHET_STONE]=SPRITE_WHET_STONE;
+cellSprites[CELL_AXE_USABLE]=SPRITE_AXE_USABLE;
+cellSprites[CELL_AXE_DULL]=SPRITE_AXE_DULL;
 cellSprites[CELL_TREE]=SPRITE_TREE;
 cellSprites[CELL_HEALTH_POTION]=SPRITE_HEALTH_POTION;
 cellSprites[CELL_CHICKEN_LEG]=SPRITE_CHICKEN_LEG;
@@ -59,6 +69,8 @@ class Cells{
             || cell == CELL_LEVER_GREEN
             || cell == CELL_LEVER_RED
             || cell == CELL_MINION
+            || cell == CELL_BED
+            || cell == CELL_WHET_STONE
             || Cells.isSign(cell) 
             || Cells.isLocked(cell);
     }
@@ -69,6 +81,8 @@ class Cells{
         return cell == CELL_TRAP
             || cell == CELL_LEVER_GREEN
             || cell == CELL_LEVER_RED
+            || cell == CELL_WHET_STONE
+            || cell == CELL_BED
     }
     static isCreature(cell){
         return cell == CELL_MINION;
@@ -122,6 +136,8 @@ class Cells{
             || cell == CELL_TORCH 
             || cell == CELL_HEALTH_POTION
             || cell == CELL_CHICKEN_LEG
+            || cell == CELL_AXE_DULL
+            || cell == CELL_AXE_USABLE
             || cell == CELL_FISHBONE;
     }
     static isLit(cell,dx,dy){

@@ -27,6 +27,12 @@ const SPRITE_COFFIN = "coffin";
 const SPRITE_TREE = "tree";
 const SPRITE_ENERGY_FULL = "rolling-energy-full";
 const SPRITE_ENERGY_EMPTY = "rolling-energy-empty";
+const SPRITE_BED = "bed";
+const SPRITE_TREE_CHOPPABLE = "tree-choppable";
+const SPRITE_WHET_STONE = "whet-stone";
+const SPRITE_AXE_USABLE = "axe-usable";
+const SPRITE_AXE_DULL = "axe-dull";
+
 
 const SPRITE_SIGN_BIG = "sign-big";
 const SPRITE_CONTROLS_BIG = "controls-big";
@@ -38,6 +44,11 @@ let spriteImages = {
 };
 class Sprites{
     static load(){
+        spriteImages[SPRITE_BED]               = loadImage('assets/images/bed.png');
+        spriteImages[SPRITE_TREE_CHOPPABLE]    = loadImage('assets/images/pine-tree-choppable.png');
+        spriteImages[SPRITE_WHET_STONE]        = loadImage('assets/images/stone-wheel.png');
+        spriteImages[SPRITE_AXE_USABLE]        = loadImage('assets/images/wood-axe-usable.png');
+        spriteImages[SPRITE_AXE_DULL]          = loadImage('assets/images/wood-axe-dull.png');
         spriteImages[SPRITE_ENERGY_FULL]       = loadImage('assets/images/rolling-energy-full.png');
         spriteImages[SPRITE_ENERGY_EMPTY]      = loadImage('assets/images/rolling-energy-empty.png');
         spriteImages[SPRITE_TREE]              = loadImage('assets/images/pine-tree.png');

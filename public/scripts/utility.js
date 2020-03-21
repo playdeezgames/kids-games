@@ -8,7 +8,7 @@ class Utility{
         }else if(value>maximum){
             return maximum;
         }else{
-            value;
+            return value;
         }
     }
 }
