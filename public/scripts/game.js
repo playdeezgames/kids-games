@@ -9,7 +9,7 @@ const UPDATE_TIMER = 200;
 let updateTimer = 0;
 class Game{
     static preload(){
-        Cells.load();
+        //Cells.load();
         RoomData.load();
         RoomTemplates.load();
         Avatar.load();
