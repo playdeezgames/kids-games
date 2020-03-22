@@ -76,7 +76,7 @@ class Cells{
         }
     }
     static isBlocking(cell){
-        if(Cells.isSign(cell) || Cells.isLocked(cell)){
+        if(Cells.isSign(cell) || Cells.isLocked(cell) || Cells.canInteract(cell)){
             return true;
         }else{
             let descriptor = cellDescriptors[cell];
@@ -94,6 +94,14 @@ class Cells{
         let descriptor = cellDescriptors[cell];
         if(descriptor!=null){
             return descriptor.isTrigger || false;
+        }else{
+            return false;
+        }
+    }
+    static canInteract(cell){
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null){
+            return descriptor.canInteract || false;
         }else{
             return false;
         }

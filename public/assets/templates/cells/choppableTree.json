@@ -1,4 +1,14 @@
 {
     "sprite":"tree-choppable",
-    "isBlocking":true
+    "canInteract":true,
+    "interactionRequirements":[
+        {"type":"has-energy","value":1},
+        {"type":"has-item","value":29,"count":1}
+    ],
+    "interactions":[
+        {"type":"remove-energy","value":1},
+        {"type":"remove-inventory","value":29,"count":1},
+        {"type":"add-inventory","value":30,"count":1},
+        {"type":"set-cell","value":0}
+    ]
 }

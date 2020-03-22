@@ -1,5 +1,7 @@
 {
     "sprite":"bed",
-    "isTrigger":true,
-    "isBlocking":true
+    "canInteract":true,
+    "interactions":[
+        {"type":"add-energy","value":10}
+    ]
 }
