@@ -1,0 +1,6 @@
+{
+    "isCreature":true,
+    "sprite":"bully-minion",
+    "threatLevel":1,
+    "isBlocking":true
+}

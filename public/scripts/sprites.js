@@ -85,6 +85,8 @@ class Sprites{
         spriteImages[SPRITE_INVENTORY_PANEL]   = loadImage('assets/images/inventory-panel.png');
     }
     static render(sprite,x,y){
-        image(spriteImages[sprite],x,y);
+        if(spriteImages[sprite]!=null){
+            image(spriteImages[sprite],x,y);
+        }
     }
 }

@@ -29,126 +29,145 @@ const CELL_TREE_CHOPPABLE = 27;
 const CELL_WHET_STONE = 28;
 const CELL_AXE_USABLE = 29;
 const CELL_AXE_DULL = 30;
+const CELL_FAKE_WALL = 31;
 
-let cellSprites = {};
-cellSprites[CELL_BED]=SPRITE_BED;
-cellSprites[CELL_TREE_CHOPPABLE]=SPRITE_TREE_CHOPPABLE;
-cellSprites[CELL_WHET_STONE]=SPRITE_WHET_STONE;
-cellSprites[CELL_AXE_USABLE]=SPRITE_AXE_USABLE;
-cellSprites[CELL_AXE_DULL]=SPRITE_AXE_DULL;
-cellSprites[CELL_TREE]=SPRITE_TREE;
-cellSprites[CELL_HEALTH_POTION]=SPRITE_HEALTH_POTION;
-cellSprites[CELL_CHICKEN_LEG]=SPRITE_CHICKEN_LEG;
-cellSprites[CELL_COFFIN]=SPRITE_COFFIN;
-cellSprites[CELL_MINION]=SPRITE_MINION;
-cellSprites[CELL_BROADSWORD]=SPRITE_BROADSWORD;
-cellSprites[CELL_SHIELD]=SPRITE_SHIELD;
-cellSprites[CELL_LEVER_RED]=SPRITE_LEVER_RED;
-cellSprites[CELL_LEVER_GREEN]=SPRITE_LEVER_GREEN;
-cellSprites[CELL_WALL]=SPRITE_WALL;
-cellSprites[CELL_AVATAR]=SPRITE_AVATAR;
-cellSprites[CELL_SIGN]=SPRITE_SIGN;
-cellSprites[CELL_WOOD_DOOR]=SPRITE_WOOD_DOOR;
-cellSprites[CELL_WOOD_DOOR_CYAN]=SPRITE_WOOD_DOOR_CYAN;
-cellSprites[CELL_WOOD_DOOR_MAGENTA]=SPRITE_WOOD_DOOR_MAGENTA;
-cellSprites[CELL_WOOD_DOOR_YELLOW]=SPRITE_WOOD_DOOR_YELLOW;
-cellSprites[CELL_KEY_CYAN]    = SPRITE_KEY_CYAN;
-cellSprites[CELL_KEY_MAGENTA] = SPRITE_KEY_MAGENTA;
-cellSprites[CELL_KEY_YELLOW]  = SPRITE_KEY_YELLOW;
-cellSprites[CELL_TORCH] = SPRITE_TORCH;
-cellSprites[CELL_CAT] = SPRITE_CAT;
-cellSprites[CELL_FISHBONE] = SPRITE_FISHBONE;
-cellSprites[CELL_MAGIC_PORTAL] = SPRITE_MAGIC_PORTAL;
+let cellDescriptors = {};
 class Cells{
+    static load(){
+        cellDescriptors[CELL_FAKE_WALL] = loadJSON("/assets/templates/cells/fakeWall.json");
+        cellDescriptors[CELL_FLOOR] = loadJSON("/assets/templates/cells/floor.json");
+        cellDescriptors[CELL_WALL] = loadJSON("/assets/templates/cells/wall.json");
+        cellDescriptors[CELL_SIGN] = loadJSON("/assets/templates/cells/sign.json");
+        cellDescriptors[CELL_WOOD_DOOR] = loadJSON("/assets/templates/cells/door.json");
+        cellDescriptors[CELL_WOOD_DOOR_CYAN] = loadJSON("/assets/templates/cells/cyanDoor.json");
+        cellDescriptors[CELL_WOOD_DOOR_MAGENTA] = loadJSON("/assets/templates/cells/magentaDoor.json");
+        cellDescriptors[CELL_WOOD_DOOR_YELLOW] = loadJSON("/assets/templates/cells/yellowDoor.json");
+        cellDescriptors[CELL_KEY_CYAN] = loadJSON("/assets/templates/cells/cyanKey.json");
+        cellDescriptors[CELL_KEY_MAGENTA] = loadJSON("/assets/templates/cells/magentaKey.json");
+        cellDescriptors[CELL_KEY_YELLOW] = loadJSON("/assets/templates/cells/yellowKey.json");
+        cellDescriptors[CELL_AVATAR] = loadJSON("/assets/templates/cells/avatar.json");
+        cellDescriptors[CELL_TORCH] = loadJSON("/assets/templates/cells/torch.json");
+        cellDescriptors[CELL_CAT] = loadJSON("/assets/templates/cells/cat.json");
+        cellDescriptors[CELL_FISHBONE] = loadJSON("/assets/templates/cells/fishbone.json");
+        cellDescriptors[CELL_MAGIC_PORTAL] = loadJSON("/assets/templates/cells/magicPortal.json");
+        cellDescriptors[CELL_TRAP] = loadJSON("/assets/templates/cells/trap.json");
+        cellDescriptors[CELL_LEVER_RED] = loadJSON("/assets/templates/cells/redLever.json");
+        cellDescriptors[CELL_LEVER_GREEN] = loadJSON("/assets/templates/cells/greenLever.json");
+        cellDescriptors[CELL_MINION] = loadJSON("/assets/templates/cells/minion.json");
+        cellDescriptors[CELL_BROADSWORD] = loadJSON("/assets/templates/cells/broadsword.json");
+        cellDescriptors[CELL_SHIELD] = loadJSON("/assets/templates/cells/shield.json");
+        cellDescriptors[CELL_HEALTH_POTION] = loadJSON("/assets/templates/cells/healthPotion.json");
+        cellDescriptors[CELL_CHICKEN_LEG] = loadJSON("/assets/templates/cells/chickenLeg.json");
+        cellDescriptors[CELL_COFFIN] = loadJSON("/assets/templates/cells/coffin.json");
+        cellDescriptors[CELL_MOVE] = loadJSON("/assets/templates/cells/move.json");
+        cellDescriptors[CELL_TREE] = loadJSON("/assets/templates/cells/tree.json");
+        cellDescriptors[CELL_BED] = loadJSON("/assets/templates/cells/bed.json");
+        cellDescriptors[CELL_TREE_CHOPPABLE] = loadJSON("/assets/templates/cells/choppableTree.json");
+        cellDescriptors[CELL_WHET_STONE] = loadJSON("/assets/templates/cells/whetStone.json");
+        cellDescriptors[CELL_AXE_USABLE] = loadJSON("/assets/templates/cells/usableAxe.json");
+        cellDescriptors[CELL_AXE_DULL] = loadJSON("/assets/templates/cells/dullAxe.json");
+    }
     static getSprite(cell){
-        return cellSprites[cell];
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null){
+            return descriptor.sprite;
+        }else{
+            return null;
+        }
     }
     static isBlocking(cell){
-        return cell == CELL_WALL 
-            || cell == CELL_TREE
-            || cell == CELL_LEVER_GREEN
-            || cell == CELL_LEVER_RED
-            || cell == CELL_MINION
-            || cell == CELL_BED
-            || cell == CELL_WHET_STONE
-            || Cells.isSign(cell) 
-            || Cells.isLocked(cell);
+        if(Cells.isSign(cell) || Cells.isLocked(cell)){
+            return true;
+        }else{
+            let descriptor = cellDescriptors[cell];
+            if(descriptor!=null){
+                return descriptor.isBlocking || false;
+            }else{
+                return false;
+            }
+        }
     }
     static isLocked(cell){
         return Cells.getKey(cell)!=null;
     }
     static isTrigger(cell){
-        return cell == CELL_TRAP
-            || cell == CELL_LEVER_GREEN
-            || cell == CELL_LEVER_RED
-            || cell == CELL_WHET_STONE
-            || cell == CELL_BED
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null){
+            return descriptor.isTrigger || false;
+        }else{
+            return false;
+        }
     }
     static isCreature(cell){
-        return cell == CELL_MINION;
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null){
+            return descriptor.isCreature || false;
+        }else{
+            return false;
+        }
     }
     static getThreatLevel(cell){
-        if(cell == CELL_MINION){
-            return 1;
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null){
+            return descriptor.threatLevel || 0;
         }else{
             return 0;
         }
     }
     static getKey(cell){
-        if(cell==CELL_WOOD_DOOR_CYAN){
-            return CELL_KEY_CYAN
-        }else if(cell==CELL_WOOD_DOOR_MAGENTA){
-            return CELL_KEY_MAGENTA;
-        }else if(cell==CELL_WOOD_DOOR_YELLOW){
-            return CELL_KEY_YELLOW;
-        }else if(cell==CELL_CAT){
-            return CELL_FISHBONE;
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null){
+            return descriptor.key;
         }else{
             return null;
         }
     }
     static unlock(cell){
-        if(cell==CELL_WOOD_DOOR_CYAN){
-            return CELL_WOOD_DOOR;
-        }else if(cell==CELL_WOOD_DOOR_MAGENTA){
-            return CELL_WOOD_DOOR;
-        }else if(cell==CELL_WOOD_DOOR_YELLOW){
-            return CELL_WOOD_DOOR;
-        }else if(cell==CELL_CAT){
-            return CELL_FLOOR;
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null){
+            return descriptor.unlocked;
         }else{
-            return cell;
+            return null;
         }
     }
     static isSign(cell){
-        return cell == CELL_SIGN;
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null){
+            return descriptor.isSign || false;
+        }else{
+            return false;
+        }
     }
     static isExit(cell){
-        return cell == CELL_WOOD_DOOR 
-            || cell == CELL_MAGIC_PORTAL;
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null){
+            return descriptor.isExit || false;
+        }else{
+            return false;
+        }
     }
     static isItem(cell){
-        return cell == CELL_KEY_CYAN 
-            || cell == CELL_KEY_MAGENTA 
-            || cell == CELL_KEY_YELLOW 
-            || cell == CELL_BROADSWORD
-            || cell == CELL_SHIELD
-            || cell == CELL_TORCH 
-            || cell == CELL_HEALTH_POTION
-            || cell == CELL_CHICKEN_LEG
-            || cell == CELL_AXE_DULL
-            || cell == CELL_AXE_USABLE
-            || cell == CELL_FISHBONE;
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null){
+            return descriptor.isItem || false;
+        }else{
+            return false;
+        }
     }
     static isLit(cell,dx,dy){
-        if(cell==CELL_AVATAR){
-            if(Math.abs(dx)>1 || Math.abs(dy)>1){
-                return Avatar.hasInventory(CELL_TORCH);
-            }else{
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null){
+            if(descriptor.isLit || false){
                 return true;
+            }else if(descriptor.isAvatar || false){
+                if(Math.abs(dx)>1 || Math.abs(dy)>1){
+                    return Avatar.hasInventory(CELL_TORCH);//TODO: check through inventory for something lit
+                }else{
+                    return true;
+                }
             }
         }else{
-            return cell == CELL_TORCH;
+            return false;
         }
     }
 }
