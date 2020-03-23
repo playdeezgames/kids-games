@@ -1,12 +1,9 @@
 let roomDatas = {};
 class RoomData{
-    static load(){
-        roomDatas[ROOM_START]=loadStrings('assets/maps/start.csv');
-        roomDatas[ROOM_NORTH_HALL]=loadStrings('assets/maps/northHall.csv');
-        roomDatas[ROOM_EAST_HALL]=loadStrings('assets/maps/eastHall.csv');
-        roomDatas[ROOM_SOUTH_HALL]=loadStrings('assets/maps/southHall.csv');
-        roomDatas[ROOM_WEST_HALL]=loadStrings('assets/maps/westHall.csv');
-        roomDatas[ROOM_OUTSET]=loadStrings('assets/maps/outset.csv');
+    static load(data){
+        for(let room in data){
+            roomDatas[room] = loadStrings(data[room].data);
+        }
     }
     static getData(roomId){
         return roomDatas[roomId];

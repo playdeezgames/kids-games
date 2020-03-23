@@ -4,3 +4,4 @@ tiled --export-map csv ./maps/eastHall.tmx ./public/assets/maps/eastHall.csv
 tiled --export-map csv ./maps/southHall.tmx ./public/assets/maps/southHall.csv
 tiled --export-map csv ./maps/westHall.tmx ./public/assets/maps/westHall.csv
 tiled --export-map csv ./maps/outset.tmx ./public/assets/maps/outset.csv
+tiled --export-map csv ./maps/crossroads.tmx ./public/assets/maps/crossroads.csv

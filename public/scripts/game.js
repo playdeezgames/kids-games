@@ -11,8 +11,11 @@ class Game{
     static preload(){
         Sprites.load();
         Cells.load();
-        RoomData.load();
-        RoomTemplates.load();
+        //TODO: preload roomids, and on success RoomData and RoomTemplates
+        RoomIds.load((data)=>{
+            RoomData.load(data);
+            RoomTemplates.load(data);
+        });
         Avatar.load();
     }
     static reset(){

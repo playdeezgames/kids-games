@@ -1,18 +1,13 @@
-const ROOM_START = "start";
-const ROOM_NORTH_HALL = "northHall";
-const ROOM_EAST_HALL = "eastHall";
-const ROOM_WEST_HALL = "westHall";
-const ROOM_SOUTH_HALL = "southHall";
-const ROOM_OUTSET = "outset";
+let roomIds = {};
 class RoomIds{
+    static load(callback){
+        roomIds = loadJSON('assets/templates/rooms/roomIds.json',callback);
+    }
     static get ids(){
-        return [
-            ROOM_START,
-            ROOM_NORTH_HALL,
-            ROOM_EAST_HALL,
-            ROOM_SOUTH_HALL,
-            ROOM_WEST_HALL,
-            ROOM_OUTSET
-        ];
+        let result = [];
+        for(let room in roomIds){
+            result.push(room);
+        }
+        return result;
     }
 }

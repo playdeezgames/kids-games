@@ -1,0 +1,10 @@
+{
+    "lit": true,
+    "signs": [
+    ],
+    "exits": [
+        {"fromColumn":0,"fromRow":10,"toRoom":"outset","toColumn":19,"toRow":10},
+        {"fromColumn":0,"fromRow":11,"toRoom":"outset","toColumn":19,"toRow":11},
+        {"fromColumn":0,"fromRow":12,"toRoom":"outset","toColumn":19,"toRow":12}
+    ]
+}

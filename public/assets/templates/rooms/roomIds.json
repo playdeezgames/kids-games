@@ -1,0 +1,30 @@
+{
+    "start":{
+        "template":"assets/templates/rooms/start.json",
+        "data":"assets/maps/start.csv"
+    },
+    "northHall":{
+        "template":"assets/templates/rooms/northHall.json",
+        "data":"assets/maps/northHall.csv"
+    },
+    "eastHall":{
+        "template":"assets/templates/rooms/eastHall.json",
+        "data":"assets/maps/eastHall.csv"
+    },
+    "southHall":{
+        "template":"assets/templates/rooms/southHall.json",
+        "data":"assets/maps/southHall.csv"
+    },
+    "westHall":{
+        "template":"assets/templates/rooms/westHall.json",
+        "data":"assets/maps/westHall.csv"
+    },
+    "outset":{
+        "template":"assets/templates/rooms/outset.json",
+        "data":"assets/maps/outset.csv"
+    },
+    "crossroads":{
+        "template":"assets/templates/rooms/crossroads.json",
+        "data":"assets/maps/crossroads.csv"
+    }
+}

@@ -8,5 +8,8 @@
         {"column":15, "row": 5, "text":"You can chop these trees, but it will dull your axe..."}
     ],
     "exits": [
+        {"fromColumn":19,"fromRow":10,"toRoom":"crossroads","toColumn":1,"toRow":10},
+        {"fromColumn":19,"fromRow":11,"toRoom":"crossroads","toColumn":1,"toRow":11},
+        {"fromColumn":19,"fromRow":12,"toRoom":"crossroads","toColumn":1,"toRow":12}
     ]
 }
