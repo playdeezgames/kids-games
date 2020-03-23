@@ -1,7 +1,7 @@
 {
-    "column": 2,
-    "row": 1,
-    "room": "outset",
+    "column": 1,
+    "row": 18,
+    "room": "start",
     "health": 10,
     "energy": 10,
     "inventory": {}
