@@ -1,7 +1,7 @@
 {
     "sprite":"bed",
     "canInteract":true,
-    "interactions":[
+    "effects":[
         {"type":"add-energy","value":10}
     ]
 }

@@ -50,7 +50,7 @@ class Game{
                         let cell = Rooms.getCell(Avatar.room, nextColumn, nextRow);
                         let threat = Rooms.getThreatLevel(Avatar.room, nextColumn, nextRow);
                         if(Cells.isBlocking(cell)){
-                            if(Cells.isLocked(cell)){
+                            if(Cells.isLocked(cell)){//TODO: make lock into interaction?
                                 let key = Cells.getKey(cell);
                                 if(Avatar.hasInventory(key)){
                                     Avatar.removeInventory(key);
@@ -60,8 +60,18 @@ class Game{
                             }else if(Cells.isTrigger(cell)){
                                 //bump trigger
                                 Rooms.activateTriggers(Avatar.room, nextColumn, nextRow);
+                            }else if(Cells.canInteract(cell)){
+                                if(Cells.meetsInteractionRequirements(cell)){
+                                    let newCell = Cells.interact(cell);
+                                    if(newCell!=null){
+                                        Rooms.setCell(Avatar.room ,nextColumn, nextRow, newCell);
+                                    }
+                                    //TODO: succeed interaction
+                                }else{
+                                    //TODO: fail interaction
+                                }
                             }else if(Cells.isCreature(cell)){
-                                if(Avatar.hasInventory(CELL_BROADSWORD)){
+                                if(Avatar.hasInventory(CELL_BROADSWORD)){//TODO: make creature into interaction?
                                     //TODO: kill monster sound
                                     Rooms.setCell(Avatar.room, nextColumn,nextRow, CELL_FLOOR);
                                     Avatar.removeInventory(CELL_BROADSWORD);

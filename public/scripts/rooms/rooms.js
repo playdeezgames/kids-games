@@ -103,33 +103,6 @@ class Rooms{
                             let old = Rooms.getCell(room, sink.column, sink.row);
                             Rooms.setCell(room,sink.column,sink.row,sink.value);
                             sink.value = old;
-                        }else if(sink.type==TRIGGERTYPE_REST){
-                            Avatar.energy += sink.value;
-                        }else if(sink.type==TRIGGERTYPE_TRADE){
-                            let fromCells = {};
-                            for(let index in sink.fromCells){
-                                let fromCell = sink.fromCells[index];
-                                fromCells[fromCell]=(fromCells[fromCell] || 0) + 1;
-                            }
-                            let hasEverything = true;
-                            for(let key in fromCells){
-                                let count = fromCells[key];
-                                if(count>Avatar.getInventory(key)){
-                                    hasEverything=false;
-                                    break;
-                                }
-                            }
-                            if(hasEverything){
-                                for(let key in fromCells){
-                                    Avatar.removeInventory(key,fromCells[key]);
-                                }
-                                for(let index in sink.toCells){
-                                    Avatar.addInventory(sink.toCells[index]);
-                                }
-                                //TODO: successful trade sound
-                            }else{
-                                //TODO: failed trade sound
-                            }
                         }
                     }
                 }

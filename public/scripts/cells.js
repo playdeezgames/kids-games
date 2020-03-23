@@ -30,10 +30,23 @@ const CELL_WHET_STONE = 28;
 const CELL_AXE_USABLE = 29;
 const CELL_AXE_DULL = 30;
 const CELL_FAKE_WALL = 31;
+const CELL_FAKE_TREE = 32;
+const CELL_CONE = 33;
+
+const REQUIREMENT_HAS_ENERGY = "has-energy";
+const REQUIREMENT_HAS_ITEM = "has-item";
+
+const EFFECT_ADD_ENERGY = "add-energy";
+const EFFECT_REMOVE_ENERGY = "remove-energy";
+const EFFECT_REMOVE_INVENTORY = "remove-inventory";
+const EFFECT_ADD_INVENTORY = "add-inventory";
+const EFFECT_SET_CELL = "set-cell";
 
 let cellDescriptors = {};
 class Cells{
     static load(){
+        cellDescriptors[CELL_CONE] = loadJSON('assets/templates/cells/cone.json');
+        cellDescriptors[CELL_FAKE_TREE] = loadJSON('assets/templates/cells/fakeTree.json');
         cellDescriptors[CELL_FAKE_WALL] = loadJSON('assets/templates/cells/fakeWall.json');
         cellDescriptors[CELL_FLOOR] = loadJSON('assets/templates/cells/floor.json');
         cellDescriptors[CELL_WALL] = loadJSON('assets/templates/cells/wall.json');
@@ -177,5 +190,57 @@ class Cells{
         }else{
             return false;
         }
+    }
+    static canInteract(cell){
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null){
+            return(descriptor.canInteract || false);
+        }else{
+            return false;
+        }
+    }
+    static meetsInteractionRequirements(cell){
+        if(Cells.canInteract(cell)){
+            let requirements = cellDescriptors[cell].requirements;
+            if(requirements!=null){
+                let result = true;
+                for(var index in requirements){
+                    let requirement = requirements[index];
+                    if(requirement.type == REQUIREMENT_HAS_ENERGY){
+                        result = result && Avatar.energy>=(requirement.value || 1);
+                    }else if(requirement.type == REQUIREMENT_HAS_ITEM){
+                        result = result && Avatar.getInventory(requirement.value)>=(requirement.count || 1);
+                    }
+                }
+                return result;
+            }else{
+                return true;//no requirements!
+            }
+        }else{
+            return false;
+        }
+    }
+    static interact(cell){
+        let result = null;
+        if(Cells.canInteract(cell)){
+            let effects = cellDescriptors[cell].effects;
+            if(effects!=null){
+                for(var index in effects){
+                    let effect = effects[index];
+                    if(effect.type == EFFECT_ADD_ENERGY){
+                        Avatar.energy += (effect.value || 1);
+                    }else if(effect.type == EFFECT_ADD_INVENTORY){
+                        Avatar.addInventory(effect.value, effect.count || 1);
+                    }else if(effect.type == EFFECT_REMOVE_ENERGY){
+                        Avatar.energy -= (effect.value || 1)
+                    }else if(effect.type == EFFECT_REMOVE_INVENTORY){
+                        Avatar.removeInventory(effect.value, effect.count || 1);
+                    }else if(effect.type == EFFECT_SET_CELL){
+                        result = effect.value;
+                    }
+                }
+            }
+        }
+        return result;
     }
 }

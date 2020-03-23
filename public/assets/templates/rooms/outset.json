@@ -1,18 +1,12 @@
 {
     "lit": true,
     "signs": [
-        {"column": 1, "row": 1, "text":"Now that you've made it out of the tutorial, the game can really begin!"}
+        {"column": 1, "row": 1, "text":"Now that you've made it out of the tutorial, the game can really begin!"},
+        {"column": 4, "row": 1, "text":"A bed, for when you need to rest!"},
+        {"column": 5, "row": 4, "text":"This whetstone is for sharpening axes."},
+        {"column": 2, "row": 5, "text":"An axe! But it is dull..."},
+        {"column":15, "row": 5, "text":"You can chop these trees, but it will dull your axe..."}
     ],
     "exits": [
-    ],
-    "triggers": {
-        "sources": [
-            {"column":5, "row": 1, "name":"bed"},
-            {"column":5, "row": 5, "name":"whet-stone", "energyCost": 1}
-        ],
-        "sinks": [
-            {"type":"rest", "name":"bed", "value": 10},
-            {"type":"trade", "name":"whet-stone", "fromCells": [30], "toCells": [29]}
-        ]
-    }
+    ]
 }

@@ -1,11 +1,11 @@
 {
     "sprite":"tree-choppable",
     "canInteract":true,
-    "interactionRequirements":[
+    "requirements":[
         {"type":"has-energy","value":1},
         {"type":"has-item","value":29,"count":1}
     ],
-    "interactions":[
+    "effects":[
         {"type":"remove-energy","value":1},
         {"type":"remove-inventory","value":29,"count":1},
         {"type":"add-inventory","value":30,"count":1},
