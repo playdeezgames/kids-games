@@ -1,4 +1,7 @@
 {
     "sprite":"axe-usable",
-    "isItem":true
+    "isItem":true,
+    "cellStates":{
+        "postPickUp":0
+    }
 }

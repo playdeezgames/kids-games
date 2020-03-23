@@ -45,40 +45,11 @@ const EFFECT_SET_CELL = "set-cell";
 let cellDescriptors = {};
 class Cells{
     static load(){
-        cellDescriptors[CELL_CONE] = loadJSON('assets/templates/cells/cone.json');
-        cellDescriptors[CELL_FAKE_TREE] = loadJSON('assets/templates/cells/fakeTree.json');
-        cellDescriptors[CELL_FAKE_WALL] = loadJSON('assets/templates/cells/fakeWall.json');
-        cellDescriptors[CELL_FLOOR] = loadJSON('assets/templates/cells/floor.json');
-        cellDescriptors[CELL_WALL] = loadJSON('assets/templates/cells/wall.json');
-        cellDescriptors[CELL_SIGN] = loadJSON('assets/templates/cells/sign.json');
-        cellDescriptors[CELL_WOOD_DOOR] = loadJSON('assets/templates/cells/door.json');
-        cellDescriptors[CELL_WOOD_DOOR_CYAN] = loadJSON('assets/templates/cells/cyanDoor.json');
-        cellDescriptors[CELL_WOOD_DOOR_MAGENTA] = loadJSON('assets/templates/cells/magentaDoor.json');
-        cellDescriptors[CELL_WOOD_DOOR_YELLOW] = loadJSON('assets/templates/cells/yellowDoor.json');
-        cellDescriptors[CELL_KEY_CYAN] = loadJSON('assets/templates/cells/cyanKey.json');
-        cellDescriptors[CELL_KEY_MAGENTA] = loadJSON('assets/templates/cells/magentaKey.json');
-        cellDescriptors[CELL_KEY_YELLOW] = loadJSON('assets/templates/cells/yellowKey.json');
-        cellDescriptors[CELL_AVATAR] = loadJSON('assets/templates/cells/avatar.json');
-        cellDescriptors[CELL_TORCH] = loadJSON('assets/templates/cells/torch.json');
-        cellDescriptors[CELL_CAT] = loadJSON('assets/templates/cells/cat.json');
-        cellDescriptors[CELL_FISHBONE] = loadJSON('assets/templates/cells/fishbone.json');
-        cellDescriptors[CELL_MAGIC_PORTAL] = loadJSON('assets/templates/cells/magicPortal.json');
-        cellDescriptors[CELL_TRAP] = loadJSON('assets/templates/cells/trap.json');
-        cellDescriptors[CELL_LEVER_RED] = loadJSON('assets/templates/cells/redLever.json');
-        cellDescriptors[CELL_LEVER_GREEN] = loadJSON('assets/templates/cells/greenLever.json');
-        cellDescriptors[CELL_MINION] = loadJSON('assets/templates/cells/minion.json');
-        cellDescriptors[CELL_BROADSWORD] = loadJSON('assets/templates/cells/broadsword.json');
-        cellDescriptors[CELL_SHIELD] = loadJSON('assets/templates/cells/shield.json');
-        cellDescriptors[CELL_HEALTH_POTION] = loadJSON('assets/templates/cells/healthPotion.json');
-        cellDescriptors[CELL_CHICKEN_LEG] = loadJSON('assets/templates/cells/chickenLeg.json');
-        cellDescriptors[CELL_COFFIN] = loadJSON('assets/templates/cells/coffin.json');
-        cellDescriptors[CELL_MOVE] = loadJSON('assets/templates/cells/move.json');
-        cellDescriptors[CELL_TREE] = loadJSON('assets/templates/cells/tree.json');
-        cellDescriptors[CELL_BED] = loadJSON('assets/templates/cells/bed.json');
-        cellDescriptors[CELL_TREE_CHOPPABLE] = loadJSON('assets/templates/cells/choppableTree.json');
-        cellDescriptors[CELL_WHET_STONE] = loadJSON('assets/templates/cells/whetStone.json');
-        cellDescriptors[CELL_AXE_USABLE] = loadJSON('assets/templates/cells/usableAxe.json');
-        cellDescriptors[CELL_AXE_DULL] = loadJSON('assets/templates/cells/dullAxe.json');
+        loadJSON("assets/templates/cells/cells.json",(data)=>{
+            for(let cell in data){
+                cellDescriptors[cell]=loadJSON(data[cell]);
+            }
+        });
     }
     static getSprite(cell){
         let descriptor = cellDescriptors[cell];
@@ -242,5 +213,14 @@ class Cells{
             }
         }
         return result;
+    }
+    static getSound(cell,sound){
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null){
+            if(descriptor.sounds!=null){
+                return descriptor.sounds[sound];
+            }
+        }
+        return null;
     }
 }

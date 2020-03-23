@@ -1,4 +1,7 @@
 {
     "sprite":"fishbone",
-    "isItem":true
+    "isItem":true,
+    "cellStates":{
+        "postPickUp":0
+    }
 }

@@ -2,5 +2,13 @@
     "isCreature":true,
     "sprite":"bully-minion",
     "threatLevel":1,
-    "isBlocking":true
+    "isBlocking":true,
+    "canInteract":true,
+    "requirements":[
+        {"type":"has-item","value":19,"count":1}
+    ],
+    "effects":[
+        {"type":"remove-inventory","value":19,"count":1},
+        {"type":"set-cell","value":0}
+    ]
 }

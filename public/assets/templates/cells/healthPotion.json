@@ -1,4 +1,7 @@
 {
     "sprite":"health-potion",
-    "isItem":true
+    "isItem":true,
+    "cellStates":{
+        "postPickUp":0
+    }
 }

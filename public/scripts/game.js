@@ -10,8 +10,8 @@ let updateTimer = 0;
 class Game{
     static preload(){
         Sprites.load();
+        Audio.load();
         Cells.load();
-        //TODO: preload roomids, and on success RoomData and RoomTemplates
         RoomIds.load((data)=>{
             RoomData.load(data);
             RoomTemplates.load(data);
@@ -73,12 +73,6 @@ class Game{
                                 }else{
                                     //TODO: fail interaction
                                 }
-                            }else if(Cells.isCreature(cell)){
-                                if(Avatar.hasInventory(CELL_BROADSWORD)){//TODO: make creature into interaction?
-                                    //TODO: kill monster sound
-                                    Rooms.setCell(Avatar.room, nextColumn,nextRow, CELL_FLOOR);
-                                    Avatar.removeInventory(CELL_BROADSWORD);
-                                }
                             }
                             Avatar.bumpColumn = nextColumn;
                             Avatar.bumpRow = nextRow;
@@ -88,7 +82,7 @@ class Game{
                         }else if (Cells.isExit(cell)){
                             let exit = Rooms.getExit(Avatar.room,nextColumn,nextRow);
                             if(exit!=null){
-                                if(!Rooms.isRoomLit(Avatar.room)){
+                                if(!Rooms.isRoomLit(Avatar.room)){//TODO: leave room event?
                                     if(Avatar.hasInventory(CELL_TORCH)){
                                         Avatar.removeInventory(CELL_TORCH,1);
                                     }
@@ -99,13 +93,16 @@ class Game{
                                 nextColumn = exit.toColumn;
                                 nextRow = exit.toRow;
                                 threat = 0;
-                                //TODO: play a travel sound!
+                                let sound = Cells.getSound(cell,"exit");//TODO: nonmagic string
+                                if(sound!=null){
+                                    Audio.play(sound);
+                                }
                             }
                         }else if(Cells.isTrigger(cell)){
                             Rooms.activateTriggers(Avatar.room, nextColumn, nextRow);
                         }else if(Cells.isItem(cell)){
                             Avatar.addInventory(cell);
-                            Rooms.setCell(Avatar.room,nextColumn,nextRow,CELL_FLOOR);
+                            Rooms.setCell(Avatar.room,nextColumn,nextRow,CELL_FLOOR);//TODO: get what an item decays to into the cell's file?
                             //TODO: play an item pickup sound!
                         }
                         if(threat>0){
@@ -143,7 +140,7 @@ class Game{
                 }
                 let cell = Rooms.getCell(Avatar.room,column,row);
                 let sprite = Cells.getSprite(cell);
-                if(!Rooms.isLit(Avatar.room, column, row) && cell!=CELL_AVATAR){
+                if(!Rooms.isLit(Avatar.room, column, row) && cell!=CELL_AVATAR){//TODO: eliminate hard reference to avatar cell....
                     sprite = SPRITE_DARKNESS;
                 }
                 if(sprite!=null){

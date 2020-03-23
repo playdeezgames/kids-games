@@ -1,5 +1,11 @@
 {
     "sprite":"wood-door-magenta",
-    "key":8,
-    "unlocked":3
+    "canInteract":true,
+    "requirements":[
+        {"type":"has-item","value":8,"count":1}
+    ],
+    "effects":[
+        {"type":"remove-inventory","value":8,"count":1},
+        {"type":"set-cell","value":3}
+    ]
 }

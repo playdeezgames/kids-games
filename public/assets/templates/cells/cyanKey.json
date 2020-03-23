@@ -1,4 +1,7 @@
 {
     "sprite":"key-cyan",
-    "isItem":true
+    "isItem":true,
+    "cellStates":{
+        "postPickUp":0
+    }
 }

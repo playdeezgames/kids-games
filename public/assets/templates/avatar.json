@@ -4,5 +4,9 @@
     "room": "start",
     "health": 10,
     "energy": 10,
-    "inventory": {}
+    "inventory": {},
+    "cellStates":{
+        "alive":10,
+        "dead":23
+    }
 }

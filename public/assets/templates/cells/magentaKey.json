@@ -1,4 +1,7 @@
 {
     "sprite":"key-magenta",
-    "isItem":true
+    "isItem":true,
+    "cellStates":{
+        "postPickUp":0
+    }
 }

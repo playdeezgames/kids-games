@@ -1,4 +1,7 @@
 {
     "sprite":"wood-door",
-    "isExit":true
+    "isExit":true,
+    "sounds":{
+        "exit":"doorOpen"
+    }
 }

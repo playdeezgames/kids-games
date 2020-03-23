@@ -1,5 +1,11 @@
 {
     "sprite":"wood-door-yellow",
-    "key":9,
-    "unlocked":3
+    "canInteract":true,
+    "requirements":[
+        {"type":"has-item","value":9,"count":1}
+    ],
+    "effects":[
+        {"type":"remove-inventory","value":9,"count":1},
+        {"type":"set-cell","value":3}
+    ]
 }

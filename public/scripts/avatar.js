@@ -79,9 +79,9 @@ class Avatar{
     }
     static get cell(){
         if(Avatar.alive){
-            return CELL_AVATAR;
+            return avatar.cellStates.alive;
         }else{
-            return CELL_COFFIN;
+            return avatar.cellStates.dead;
         }
     }
     static get alive(){
@@ -102,7 +102,7 @@ class Avatar{
     static applyThreat(threat){
         if(threat>0){
             //shields
-            let shields = Avatar.getInventory(CELL_SHIELD);
+            let shields = Avatar.getInventory(CELL_SHIELD);//TODO: make a "isarmor" property for cells
             if(shields>threat){
                 Avatar.removeInventory(CELL_SHIELD,shields-threat);
                 threat = 0;
@@ -118,12 +118,12 @@ class Avatar{
     }
     static eat(){
         if(Avatar.alive){
-            if(Avatar.health < AVATAR_MAXIMUM_HEALTH && Avatar.hasInventory(CELL_CHICKEN_LEG)){
+            if(Avatar.health < AVATAR_MAXIMUM_HEALTH && Avatar.hasInventory(CELL_CHICKEN_LEG)){//TODO: make a "caneat" property for cells
                 Avatar.removeInventory(CELL_CHICKEN_LEG);
                 Avatar.health += 1;
             }
         }else{
-            if(Avatar.hasInventory(CELL_HEALTH_POTION)){
+            if(Avatar.hasInventory(CELL_HEALTH_POTION)){//TODO: make a "ispotion" property for cells
                 Avatar.removeInventory(CELL_HEALTH_POTION);
                 Avatar.health = AVATAR_MAXIMUM_HEALTH;
             }

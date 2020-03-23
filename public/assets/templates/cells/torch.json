@@ -1,5 +1,8 @@
 {
     "sprite":"torch",
     "isItem":true,
-    "isLit":true
+    "isLit":true,
+    "cellStates":{
+        "postPickUp":0
+    }
 }
