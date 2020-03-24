@@ -32,5 +32,6 @@
     "assets/templates/cells/dullAxe.json",
     "assets/templates/cells/fakeWall.json",
     "assets/templates/cells/fakeTree.json",
-    "assets/templates/cells/cone.json"
+    "assets/templates/cells/cone.json",
+    "assets/templates/cells/litAvatar.json"
 ]

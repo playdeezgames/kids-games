@@ -1,9 +1,5 @@
 const TRIGGERTYPE_SWITCH = "switch";
 const TRIGGERTYPE_TOGGLE = "toggle";
-const TRIGGERTYPE_REST = "rest";
-const TRIGGERTYPE_TRADE = "trade";
-const TRIGGERTYPE_ENERGY_COST = "energy-cost";
-
 let rooms = {};
 class Rooms{
     static reset(){

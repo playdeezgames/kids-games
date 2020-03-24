@@ -1,7 +1,7 @@
 let roomIds = {};
 class RoomIds{
     static load(callback){
-        roomIds = loadJSON('assets/templates/rooms/roomIds.json',callback);
+        roomIds = loadJSON('assets/templates/rooms/roomIds.json',callback);//TODO: magic string
     }
     static get ids(){
         let result = [];

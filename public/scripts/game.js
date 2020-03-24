@@ -6,6 +6,8 @@ const SIGNTEXT_COLOR = "#000000";
 const INVENTORYTEXT_COLOR = "#008080";
 const THREATTEXT_COLOR = "#000000"
 const UPDATE_TIMER = 200;
+const GAMEOVER_TEXT = "GAME OVER!\nPress R to restart.";
+
 let updateTimer = 0;
 class Game{
     static preload(){
@@ -53,11 +55,10 @@ class Game{
                         let cell = Rooms.getCell(Avatar.room, nextColumn, nextRow);
                         let threat = Rooms.getThreatLevel(Avatar.room, nextColumn, nextRow);
                         if(Cells.isBlocking(cell)){
-                            if(Cells.isLocked(cell)){//TODO: make lock into interaction?
+                            if(Cells.isLocked(cell)){//TODO: make lock into interaction? (yes)
                                 let key = Cells.getKey(cell);
                                 if(Avatar.hasInventory(key)){
                                     Avatar.removeInventory(key);
-                                    //TODO: make sound
                                     Rooms.setCell(Avatar.room, nextColumn, nextRow,Cells.unlock(cell));
                                 }
                             }else if(Cells.isTrigger(cell)){
@@ -69,9 +70,9 @@ class Game{
                                     if(newCell!=null){
                                         Rooms.setCell(Avatar.room ,nextColumn, nextRow, newCell);
                                     }
-                                    //TODO: succeed interaction
+                                    Audio.play(Cells.getSound(cell,SOUND_INTERACTION_SUCCESS));
                                 }else{
-                                    //TODO: fail interaction
+                                    Audio.play(Cells.getSound(cell,SOUND_INTERACTION_FAILURE));
                                 }
                             }
                             Avatar.bumpColumn = nextColumn;
@@ -82,7 +83,7 @@ class Game{
                         }else if (Cells.isExit(cell)){
                             let exit = Rooms.getExit(Avatar.room,nextColumn,nextRow);
                             if(exit!=null){
-                                if(!Rooms.isRoomLit(Avatar.room)){//TODO: leave room event?
+                                if(!Rooms.isRoomLit(Avatar.room)){//TODO: leave room event? (no... make door "locked" with torch....)
                                     if(Avatar.hasInventory(CELL_TORCH)){
                                         Avatar.removeInventory(CELL_TORCH,1);
                                     }
@@ -93,21 +94,18 @@ class Game{
                                 nextColumn = exit.toColumn;
                                 nextRow = exit.toRow;
                                 threat = 0;
-                                let sound = Cells.getSound(cell,"exit");//TODO: nonmagic string
-                                if(sound!=null){
-                                    Audio.play(sound);
-                                }
+                                Audio.play(Cells.getSound(cell,SOUND_EXIT));
                             }
                         }else if(Cells.isTrigger(cell)){
                             Rooms.activateTriggers(Avatar.room, nextColumn, nextRow);
-                        }else if(Cells.isItem(cell)){
+                        }else if(Cells.isItem(cell)){//TODO: is an item an interactable? (yes)
                             Avatar.addInventory(cell);
-                            Rooms.setCell(Avatar.room,nextColumn,nextRow,CELL_FLOOR);//TODO: get what an item decays to into the cell's file?
-                            //TODO: play an item pickup sound!
+                            Rooms.setCell(Avatar.room,nextColumn,nextRow,Cells.getCellState(cell,CELLSTATE_POSTPICKUP));
+                            Audio.play(Cells.getSound(cell,SOUND_PICK_UP));
                         }
                         if(threat>0){
                             Avatar.applyThreat(threat);
-                            //TODO: get hit sound
+                            Audio.play(Avatar.getSound(SOUND_HIT));
                         }
                         Avatar.eat();
                         Avatar.column=nextColumn;
@@ -140,7 +138,7 @@ class Game{
                 }
                 let cell = Rooms.getCell(Avatar.room,column,row);
                 let sprite = Cells.getSprite(cell);
-                if(!Rooms.isLit(Avatar.room, column, row) && cell!=CELL_AVATAR){//TODO: eliminate hard reference to avatar cell....
+                if(!Rooms.isLit(Avatar.room, column, row) && cell!=CELL_AVATAR){//TODO: refactor entire islit concept
                     sprite = SPRITE_DARKNESS;
                 }
                 if(sprite!=null){
@@ -160,7 +158,12 @@ class Game{
             textAlign(CENTER,CENTER);
             textSize(SIGNTEXT_SIZE);
             fill(SIGNTEXT_COLOR);
-            text("GAME OVER!\nPress R to restart.",ZOOM_OFFSET_X+SIGNTEXT_OFFSET_X,ZOOM_OFFSET_Y+SIGNTEXT_OFFSET_Y,SIGNTEXT_WIDTH,SIGNTEXT_HEIGHT);
+            text(
+                GAMEOVER_TEXT,
+                ZOOM_OFFSET_X+SIGNTEXT_OFFSET_X,
+                ZOOM_OFFSET_Y+SIGNTEXT_OFFSET_Y,
+                SIGNTEXT_WIDTH,
+                SIGNTEXT_HEIGHT);//
         }else if(Cells.isSign(bumpCell)){
             Sprites.render(SPRITE_SIGN_BIG,ZOOM_OFFSET_X,ZOOM_OFFSET_Y);
             let sign = Rooms.getSign(Avatar.room,Avatar.bumpColumn,Avatar.bumpRow);
@@ -189,7 +192,7 @@ class Game{
         }
     }
     static drawHealth(){
-        for(let index=0;index<AVATAR_MAXIMUM_HEALTH;++index){
+        for(let index=0;index<Avatar.maximumHealth;++index){
             let sprite = SPRITE_HEART_EMPTY;
             if(index<Avatar.health){
                 sprite = SPRITE_HEART_FULL;
@@ -198,7 +201,7 @@ class Game{
         }
     }
     static drawEnergy(){
-        for(let index=0;index<AVATAR_MAXIMUM_ENERGY;++index){
+        for(let index=0;index<Avatar.maximumEnergy;++index){
             let sprite = SPRITE_ENERGY_EMPTY;
             if(index<Avatar.energy){
                 sprite = SPRITE_ENERGY_FULL;

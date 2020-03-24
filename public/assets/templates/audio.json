@@ -1,3 +1,8 @@
 {
-    "doorOpen":"assets/audio/doorOpen_1.ogg"
+    "chop":"assets/audio/chop.ogg",
+    "doorOpen":"assets/audio/doorOpen_1.ogg",
+    "handleCoins":"assets/audio/handleCoins.ogg",
+    "knifeSlice":"assets/audio/knifeSlice.ogg",
+    "metalClick":"assets/audio/metalClick.ogg",
+    "metalLatch":"assets/audio/metalLatch.ogg"
 }

@@ -1,37 +1,37 @@
-const CELL_FLOOR = 0;
-const CELL_WALL = 1;
-const CELL_SIGN = 2;
-const CELL_WOOD_DOOR = 3;
-const CELL_WOOD_DOOR_CYAN = 4;
-const CELL_WOOD_DOOR_MAGENTA = 5;
-const CELL_WOOD_DOOR_YELLOW = 6;
-const CELL_KEY_CYAN = 7;
-const CELL_KEY_MAGENTA = 8;
-const CELL_KEY_YELLOW = 9;
-const CELL_AVATAR = 10;
-const CELL_TORCH = 11;
-const CELL_CAT = 12;
-const CELL_FISHBONE = 13;
-const CELL_MAGIC_PORTAL = 14;
-const CELL_TRAP = 15;
-const CELL_LEVER_RED = 16;
-const CELL_LEVER_GREEN = 17;
-const CELL_MINION = 18;
-const CELL_BROADSWORD = 19;
-const CELL_SHIELD = 20;
-const CELL_HEALTH_POTION = 21;
-const CELL_CHICKEN_LEG = 22;
-const CELL_COFFIN = 23;
-const CELL_MOVE = 24;
-const CELL_TREE = 25;
-const CELL_BED = 26;
-const CELL_TREE_CHOPPABLE = 27;
-const CELL_WHET_STONE = 28;
-const CELL_AXE_USABLE = 29;
-const CELL_AXE_DULL = 30;
-const CELL_FAKE_WALL = 31;
-const CELL_FAKE_TREE = 32;
-const CELL_CONE = 33;
+const CELL_FLOOR = 0;//TODO: unneeded const
+const CELL_WALL = 1;//TODO: unneeded const
+const CELL_SIGN = 2;//TODO: unneeded const
+const CELL_WOOD_DOOR = 3;//TODO: unneeded const
+const CELL_WOOD_DOOR_CYAN = 4;//TODO: unneeded const
+const CELL_WOOD_DOOR_MAGENTA = 5;//TODO: unneeded const
+const CELL_WOOD_DOOR_YELLOW = 6;//TODO: unneeded const
+const CELL_KEY_CYAN = 7;//TODO: unneeded const
+const CELL_KEY_MAGENTA = 8;//TODO: unneeded const
+const CELL_KEY_YELLOW = 9;//TODO: unneeded const
+const CELL_AVATAR = 10;//TODO: unneeded const
+const CELL_TORCH = 11;//TODO: unneeded const
+const CELL_CAT = 12;//TODO: unneeded const
+const CELL_FISHBONE = 13;//TODO: unneeded const
+const CELL_MAGIC_PORTAL = 14;//TODO: unneeded const
+const CELL_TRAP = 15;//TODO: unneeded const
+const CELL_LEVER_RED = 16;//TODO: unneeded const
+const CELL_LEVER_GREEN = 17;//TODO: unneeded const
+const CELL_MINION = 18;//TODO: unneeded const
+const CELL_BROADSWORD = 19;//TODO: unneeded const
+const CELL_SHIELD = 20;//TODO: unneeded const
+const CELL_HEALTH_POTION = 21;//TODO: unneeded const
+const CELL_CHICKEN_LEG = 22;//TODO: unneeded const
+const CELL_COFFIN = 23;//TODO: unneeded const
+const CELL_MOVE = 24;//TODO: unneeded const
+const CELL_TREE = 25;//TODO: unneeded const
+const CELL_BED = 26;//TODO: unneeded const
+const CELL_TREE_CHOPPABLE = 27;//TODO: unneeded const
+const CELL_WHET_STONE = 28;//TODO: unneeded const
+const CELL_AXE_USABLE = 29;//TODO: unneeded const
+const CELL_AXE_DULL = 30;//TODO: unneeded const
+const CELL_FAKE_WALL = 31;//TODO: unneeded const
+const CELL_FAKE_TREE = 32;//TODO: unneeded const
+const CELL_CONE = 33;//TODO: unneeded const
 
 const REQUIREMENT_HAS_ENERGY = "has-energy";
 const REQUIREMENT_HAS_ITEM = "has-item";
@@ -41,11 +41,20 @@ const EFFECT_REMOVE_ENERGY = "remove-energy";
 const EFFECT_REMOVE_INVENTORY = "remove-inventory";
 const EFFECT_ADD_INVENTORY = "add-inventory";
 const EFFECT_SET_CELL = "set-cell";
+const EFFECT_PLAY_SOUND = "play-sound";
+
+const SOUND_EXIT = "exit";
+const SOUND_PICK_UP = "pickUp";
+const SOUND_HIT = "hit";
+const SOUND_INTERACTION_SUCCESS = "interactionSuccess";
+const SOUND_INTERACTION_FAILURE = "interactionFailure";
+
+const CELLSTATE_POSTPICKUP = "postPickUp";
 
 let cellDescriptors = {};
 class Cells{
     static load(){
-        loadJSON("assets/templates/cells/cells.json",(data)=>{
+        loadJSON("assets/templates/cells/cells.json",(data)=>{//TODO: magic strings
             for(let cell in data){
                 cellDescriptors[cell]=loadJSON(data[cell]);
             }
@@ -153,7 +162,7 @@ class Cells{
                 return true;
             }else if(descriptor.isAvatar || false){
                 if(Math.abs(dx)>1 || Math.abs(dy)>1){
-                    return Avatar.hasInventory(CELL_TORCH);//TODO: check through inventory for something lit
+                    return Avatar.hasInventory(CELL_TORCH);//TODO: refactor entire 'islit' concept
                 }else{
                     return true;
                 }
@@ -198,7 +207,7 @@ class Cells{
             if(effects!=null){
                 for(var index in effects){
                     let effect = effects[index];
-                    if(effect.type == EFFECT_ADD_ENERGY){
+                    if(effect.type == EFFECT_ADD_ENERGY){//TODO: ifelse into switch?
                         Avatar.energy += (effect.value || 1);
                     }else if(effect.type == EFFECT_ADD_INVENTORY){
                         Avatar.addInventory(effect.value, effect.count || 1);
@@ -208,6 +217,8 @@ class Cells{
                         Avatar.removeInventory(effect.value, effect.count || 1);
                     }else if(effect.type == EFFECT_SET_CELL){
                         result = effect.value;
+                    }else if(effect.type == EFFECT_PLAY_SOUND){
+                        Audio.play(effect.sound);
                     }
                 }
             }
@@ -222,5 +233,12 @@ class Cells{
             }
         }
         return null;
+    }
+    static getCellState(cell,cellState){
+        let descriptor = cellDescriptors[cell];
+        if(descriptor!=null && descriptor.cellStates!=null && descriptor.cellStates[cellState]!=null){
+            return descriptor.cellStates[cellState];
+        }
+        return cell;
     }
 }

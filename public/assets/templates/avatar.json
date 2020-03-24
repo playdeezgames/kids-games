@@ -7,6 +7,12 @@
     "inventory": {},
     "cellStates":{
         "alive":10,
+        "lit":34,
         "dead":23
-    }
+    },
+    "sounds":{
+        "hit":"knifeSlice"
+    },
+    "maximumHealth":10,
+    "maximumEnergy":10
 }

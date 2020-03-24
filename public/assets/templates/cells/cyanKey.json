@@ -3,5 +3,8 @@
     "isItem":true,
     "cellStates":{
         "postPickUp":0
+    },
+    "sounds":{
+        "pickUp":"doorOpen"
     }
 }

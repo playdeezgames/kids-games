@@ -1,0 +1,1 @@
+const URL_AVATAR_TEMPLATE = 'assets/templates/avatar.json';

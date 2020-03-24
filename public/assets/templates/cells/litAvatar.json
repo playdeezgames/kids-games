@@ -2,5 +2,5 @@
     "sprite":"avatar",
     "isAvatar":true,
     "isLit":true,
-    "lightRadius": 1
+    "lightRadius": 2
 }
