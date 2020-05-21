@@ -1,11 +1,14 @@
 const TOTAL_ROUNDS = 20;
 let gameState = {};
+function randomRange(minimum, maximum){
+    return Math.floor(Math.random()*(maximum-minimum+1))+minimum;
+}
 function giveAnswer(answer){
     if(gameState.answerGiven){
         return;
     }
-    gameState.answerGiven=true;;
-    if(answer==gameState.currentProblem){
+    gameState.answerGiven=true;
+    if(answer==gameState.currentProblem.product){
         gameState.roundsCorrect++;
         document.getElementById("result").innerHTML=`<img src="./confirmed.png"/>`;
         setTimeout(()=>{
@@ -23,17 +26,12 @@ function giveAnswer(answer){
 function showProblem(){
     let content = "";
     content+=`<p>#${gameState.totalRounds-gameState.roundsLeft} of ${gameState.totalRounds}</p><hr/>`;
-    content+="<p>";
-    for(let index=0;index<gameState.currentProblem;++index){
-        content+=`<img src="${gameState.whichImage}"/>`
-    }
-    content+="</p><hr/>";
+    content+=`<h1>${gameState.currentProblem.first} &times; ${gameState.currentProblem.second} = ??</h1><hr/>`;
     content+="<p>"
-    for(let index=gameState.minimum;index<=gameState.maximum;++index){
-        content+=`<button onclick="giveAnswer(${index})"><h3> ${index} </h3></button>`;
+    for(let index=gameState.minimum * gameState.minimum;index<=gameState.maximum * gameState.maximum;++index){
+        content+=`<button onclick="giveAnswer(${index})"><h3> ${index} </h3></button> `;
     }
-    content+=`</p>`;
-    content+=`<p><span id="result"></span></p>`;
+    content+=`</p><span id="result"></span><p></p>`;
     setContent(content);
 }
 function gameOver(){
@@ -50,28 +48,30 @@ function nextProblem(){
     }
     let newProblem;
     do{
-        newProblem = Math.floor(Math.random()*(gameState.maximum-gameState.minimum+1))+gameState.minimum;
-    }while(newProblem==gameState.currentProblem);
+        newProblem = {
+            first:randomRange(gameState.minimum,gameState.maximum),
+            second:randomRange(gameState.minimum,gameState.maximum)
+        }
+    }while(newProblem.first==gameState.currentProblem.first && newProblem.second==gameState.currentProblem.second);
+    newProblem.product = newProblem.first*newProblem.second;
     gameState.currentProblem = newProblem;
     gameState.answerGiven = false;
     gameState.roundsLeft--;
     showProblem();
 }
-function startGame(whichImage){
-    gameState.whichImage = whichImage;
-    gameState.maximum = 20;
-    gameState.minimum = 1;
+function startGame(){
+    gameState.maximum = 10;
+    gameState.minimum = 0;
     gameState.roundsLeft = TOTAL_ROUNDS;
     gameState.totalRounds = TOTAL_ROUNDS;
     gameState.roundsCorrect = 0;
     gameState.badGuesses = 0;
+    gameState.currentProblem = {}
     nextProblem();
 }
 function setContent(content){
     document.body.innerHTML=content;
 }
 function main(){
-    let content = "";
-    content+=`<p><button><img src="./unicorn.png" onclick="startGame('./unicorn.png')"/></button><button><img src="./ghost.png"/ onclick="startGame('./ghost.png')"></button></p>`;
-    setContent(content);
+    startGame();
 }
