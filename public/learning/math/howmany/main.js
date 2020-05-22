@@ -30,7 +30,7 @@ function showProblem(){
     content+="</p><hr/>";
     content+="<p>"
     for(let index=gameState.minimum;index<=gameState.maximum;++index){
-        content+=`<button onclick="giveAnswer(${index})"><h3> ${index} </h3></button>`;
+        content+=`<button onclick="giveAnswer(${index})"><h3> ${index} </h3></button> `;
     }
     content+=`</p>`;
     content+=`<p><span id="result"></span></p>`;
