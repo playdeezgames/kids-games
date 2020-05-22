@@ -13,6 +13,10 @@ button {
   padding-left:18px;
   padding-right:18px;
 }    
+input{
+  font-family: KGPrimaryPenmanship2;
+  font-size: 36px;
+}
 h1{
   font-size: 72px;
 }  
