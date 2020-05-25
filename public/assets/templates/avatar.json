@@ -7,7 +7,6 @@
     "inventory": {},
     "cellStates":{
         "alive":10,
-        "lit":34,
         "dead":23
     },
     "sounds":{
