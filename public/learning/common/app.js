@@ -2,8 +2,6 @@ import { Display } from "./display.js"
 import { Utility } from "./utility.js"
 const COMMAND_START = "start"
 const COMMAND_ANSWER = "answer"
-const TITLE = "Place Values (1,000)" //parameter
-const PROBLEM_COUNT = 10 //parameter
 let problemSet = []
 let appState
 let currentProblem;
@@ -11,6 +9,7 @@ export class App {
     static start(title, problemCount, problemGenerator) {
         App.createProblemSet(problemGenerator, problemCount)
         Display.setContent(`<h1>${title}</h1><p>${Display.commandButton("Start!", [COMMAND_START])}</p>`)
+        document.title = title
     }
     static showProblem(){
         let content = ""
@@ -82,7 +81,7 @@ export class App {
         },1000);
     }
     static incorrectAnswer(){
-        appState.incorrectAnswer++
+        appState.wrongAnswers++
         document.getElementById("result").innerHTML=`<img src="./cancel.png"/>`
         setTimeout(()=>{
             document.getElementById("result").innerHTML=""
@@ -125,3 +124,5 @@ export class App {
         }
     }
 }
+window.doCommand = App.doCommand
+window.doInput = App.doInput
