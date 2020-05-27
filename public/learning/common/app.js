@@ -1,5 +1,4 @@
 import { Display } from "./display.js"
-import { ProblemGenerator } from "./problemgenerator.js" //parameter
 import { Utility } from "./utility.js"
 const COMMAND_START = "start"
 const COMMAND_ANSWER = "answer"
@@ -126,6 +125,3 @@ export class App {
         }
     }
 }
-window.doCommand = App.doCommand
-window.doInput = App.doInput
-document.addEventListener("DOMContentLoaded", e => App.start(TITLE, PROBLEM_COUNT, ProblemGenerator))
