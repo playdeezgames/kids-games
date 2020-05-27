@@ -1,4 +1,4 @@
-const TOTAL_ROUNDS = 20;
+const TOTAL_ROUNDS = 10;
 const IMAGE_WIDTH = 64;
 const IMAGE_HEIGHT = 64;
 const GRID_COLUMNS=10;

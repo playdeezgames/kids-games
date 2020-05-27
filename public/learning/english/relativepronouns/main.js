@@ -1,4 +1,4 @@
-const TOTAL_ROUNDS = 15;
+const TOTAL_ROUNDS = 10;
 const list=[];
 const used=[];
 function addToList(text,answer,choices){

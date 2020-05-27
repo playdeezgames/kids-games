@@ -1,4 +1,4 @@
-const TOTAL_ROUNDS = 20;
+const TOTAL_ROUNDS = 10;
 let gameState = {};
 function randomRange(minimum, maximum){
     return Math.floor(Math.random()*(maximum-minimum+1))+minimum;

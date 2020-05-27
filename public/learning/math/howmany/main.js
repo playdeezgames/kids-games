@@ -1,4 +1,4 @@
-const TOTAL_ROUNDS = 20;
+const TOTAL_ROUNDS = 10;
 let gameState = {};
 function giveAnswer(answer){
     if(gameState.answerGiven){

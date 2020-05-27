@@ -1,4 +1,5 @@
-const TOTAL_ROUNDS = 20;
+const TOTAL_ROUNDS = 10;
+const STORAGE_ITEM = "fragments";
 const list=[];
 const used=[];
 function addToList(text,answer){
@@ -90,6 +91,7 @@ function showProblem(){
     setContent(content);
 }
 function gameOver(){
+    gameState.endTime = Date.now();
     let content="";
     content+="<h1>All done!</h1>";
     content+=`<p>Rounds: ${gameState.roundsCorrect}</p>`;
@@ -115,12 +117,13 @@ function startGame(){
     gameState.totalRounds = TOTAL_ROUNDS;
     gameState.roundsCorrect = 0;
     gameState.badGuesses = 0;
-    gameState.currentProblem = {}
+    gameState.currentProblem = {};
+    gameState.startTime = Date.now();
     nextProblem();
 }
 function setContent(content){
     document.body.innerHTML=content;
 }
 function main(){
-    startGame();
+    setContent(`<p><button onclick="startGame();">Start</button></p>`);
 }

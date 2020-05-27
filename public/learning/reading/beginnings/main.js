@@ -1,4 +1,4 @@
-const TOTAL_ROUNDS = 20;
+const TOTAL_ROUNDS = 10;
 const CHOICE_COUNT = 4;
 const table={};
 const list = [];
