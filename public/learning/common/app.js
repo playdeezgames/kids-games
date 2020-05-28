@@ -18,7 +18,10 @@ export class App {
         content += `<h1>${currentProblem.prompt}<span id="result"></span><p></h1><hr/>`
         content += "<p>"
         if(currentProblem.choices.length>0){
-
+            let choices = currentProblem.choices.sort(Utility.randomSort)
+            for(let choice of choices){
+                content+=Display.commandButton(choice,[COMMAND_ANSWER,choice])
+            }
         }else{
             content+=`<input type="text" autofocus id="answer" onkeydown="doInput();"/>`
         }
